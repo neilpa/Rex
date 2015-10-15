@@ -99,3 +99,42 @@ extension SignalProducerType where T: SequenceType {
     }
 }
 
+
+// MARK: Boolean Operations
+
+extension SignalProducerType where T: BooleanType {
+    /// Returns a producer that inverts every value sent on self
+    @warn_unused_result(message="Did you forget to call `start` on the producer?")
+    public func not() -> SignalProducer<Bool, E> {
+        return lift { $0.not() }
+    }
+}
+
+extension SignalProducerType where T: SequenceType, T.Generator.Element: BooleanType {
+    /// Returns a producer that sends `a && b && c && ...` for each value (a, b, c, ...) sent on self
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
+    public func and() -> SignalProducer<Bool, E> {
+        return lift { $0.and() }
+    }
+    
+    /// Returns a producer that sends `a ||& b || c || ...` for each value (a, b, c, ...) sent on self
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
+    public func or() -> SignalProducer<Bool, E> {
+        return lift { $0.or() }
+    }
+}
+
+extension SignalProducerType where T == (Bool, Bool) {
+    /// Returns a producer that sends `a && b` for each value (a, b) sent on self
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
+    public func and() -> SignalProducer<Bool, E> {
+        return lift { $0.and() }
+    }
+    
+    /// Returns a producer that sends `a || b` for each value (a, b) sent on self
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
+    public func or() -> SignalProducer<Bool, E> {
+        return lift { $0.or() }
+    }
+}
+

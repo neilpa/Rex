@@ -10,151 +10,171 @@ import ReactiveCocoa
 
 extension SignalProducerType {
 
-    /// Buckets each received value into a group based on the key returned
-    /// from `grouping`. Termination events on the original signal are
-    /// also forwarded to each producer group.
+	/// Bundles the values emitted by the producer in packets of size 'size'.
+	/// The new producer emits a new bundle only when the number of new values emitted is equal to 'size'
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func groupBy<Key: Hashable>(grouping: Value -> Key) -> SignalProducer<(Key, SignalProducer<Value, Error>), Error> {
-        return SignalProducer<(Key, SignalProducer<Value, Error>), Error> { observer, disposable in
-            var groups: [Key: Signal<Value, Error>.Observer] = [:]
+	public func bundle(size: Int) -> SignalProducer<[Value], Error> {
+		var array: [Value] = []
+		return self.map() {
+			value in
 
-            let lock = NSRecursiveLock()
-            lock.name = "me.neilpa.rex.groupBy"
+			if array.count == size {
+				array.removeAll()
+			}
 
-            self.start(Observer(next: { value in
-                let key = grouping(value)
+			array.append(value)
+			return array
+			}
+			.filter() {
+				$0.count == size
+		}
+	}
 
-                lock.lock()
-                var group = groups[key]
-                if group == nil {
-                    let (producer, sink) = SignalProducer<Value, Error>.buffer()
-                    observer.sendNext(key, producer)
-
-                    groups[key] = sink
-                    group = sink
-                }
-                lock.unlock()
-
-                group!.sendNext(value)
-
-            }, failed: { error in
-                observer.sendFailed(error)
-                groups.values.forEach { $0.sendFailed(error) }
-
-            }, completed: { _ in
-                observer.sendCompleted()
-                groups.values.forEach { $0.sendCompleted() }
-
-            }, interrupted: { _ in
-                observer.sendInterrupted()
-                groups.values.forEach { $0.sendInterrupted() }
-            }))
-        }
-    }
-
-    /// Applies `transform` to values from self with non-`nil` results unwrapped and
-    /// forwared on the returned producer.
+	/// Enforces that at least `interval` time passes before forwarding a value. If a
+	/// new value arrives, the previous one is dropped and the `interval` delay starts
+	/// again. Error events are immediately forwarded, even if there's a queued value.
+	///
+	/// This operator is useful for scenarios like type-to-search where you want to
+	/// wait for a "lull" in typing before kicking off a search request.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func filterMap<U>(transform: Value -> U?) -> SignalProducer<U, Error> {
-        return lift { $0.filterMap(transform) }
-    }
+	public func debounce(interval: NSTimeInterval, onScheduler scheduler: DateSchedulerType) -> SignalProducer<Value, Error> {
+		return lift { $0.debounce(interval, onScheduler: scheduler) }
+	}
 
-    /// Returns a producer that drops `Error` sending `replacement` terminal event
-    /// instead, defaulting to `Completed`.
+	/// Delays the start of the producer by `interval` on the provided scheduler.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func ignoreError(replacement replacement: Event<Value, NoError> = .Completed) -> SignalProducer<Value, NoError> {
-        precondition(replacement.isTerminating)
-        return lift { $0.ignoreError(replacement: replacement) }
-    }
+	public func deferred(interval: NSTimeInterval, onScheduler scheduler: DateSchedulerType) -> SignalProducer<Value, Error> {
+		return SignalProducer.empty
+			.delay(interval, onScheduler: scheduler)
+			.concat(self.producer)
+	}
 
-    /// Forwards events from self until `interval`. Then if producer isn't completed yet,
-    /// terminates with `event` on `scheduler`.
-    ///
-    /// If the interval is 0, the timeout will be scheduled immediately. The producer
-    /// must complete synchronously (or on a faster scheduler) to avoid the timeout.
+	/// Delays retrying on failure by `interval` up to `count` attempts.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func timeoutAfter(interval: NSTimeInterval, withEvent event: Event<Value, Error>, onScheduler scheduler: DateSchedulerType) -> SignalProducer<Value, Error> {
-        return lift { $0.timeoutAfter(interval, withEvent: event, onScheduler: scheduler) }
-    }
+	public func deferredRetry(interval: NSTimeInterval, onScheduler scheduler: DateSchedulerType, count: Int = .max) -> SignalProducer<Value, Error> {
+		precondition(count >= 0)
 
-    /// Enforces that at least `interval` time passes before forwarding a value. If a
-    /// new value arrives, the previous one is dropped and the `interval` delay starts
-    /// again. Error events are immediately forwarded, even if there's a queued value.
-    ///
-    /// This operator is useful for scenarios like type-to-search where you want to
-    /// wait for a "lull" in typing before kicking off a search request.
+		if count == 0 {
+			return producer
+		}
+
+		var retries = count
+		return flatMapError { error in
+			// The final attempt shouldn't defer the error if it fails
+			var producer = SignalProducer<Value, Error>(error: error)
+			if retries > 0 {
+				producer = producer.deferred(interval, onScheduler: scheduler)
+			}
+
+			retries -= 1
+			return producer
+			}
+			.retry(count)
+	}
+
+	/// Applies `transform` to values from self with non-`nil` results unwrapped and
+	/// forwared on the returned producer.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func debounce(interval: NSTimeInterval, onScheduler scheduler: DateSchedulerType) -> SignalProducer<Value, Error> {
-        return lift { $0.debounce(interval, onScheduler: scheduler) }
-    }
+	public func filterMap<U>(transform: Value -> U?) -> SignalProducer<U, Error> {
+		return lift { $0.filterMap(transform) }
+	}
 
-    /// Forwards a value and then mutes the producer by dropping all subsequent values
-    /// for `interval` seconds. Once time elapses the next new value will be forwarded
-    /// and repeat the muting process. Error events are immediately forwarded even while
-    /// the producer is muted.
-    ///
-    /// This operator could be used to coalesce multiple notifications in a short time
-    /// frame by only showing the first one.
+	/// Buckets each received value into a group based on the key returned
+	/// from `grouping`. Termination events on the original signal are
+	/// also forwarded to each producer group.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func muteFor(interval: NSTimeInterval, clock: DateSchedulerType) -> SignalProducer<Value, Error> {
-        return lift { $0.muteFor(interval, clock: clock) }
-    }
+	public func groupBy<Key: Hashable>(grouping: Value -> Key) -> SignalProducer<(Key, SignalProducer<Value, Error>), Error> {
+		return SignalProducer<(Key, SignalProducer<Value, Error>), Error> { observer, disposable in
+			var groups: [Key: Signal<Value, Error>.Observer] = [:]
 
-    /// Delays the start of the producer by `interval` on the provided scheduler.
+			let lock = NSRecursiveLock()
+			lock.name = "me.neilpa.rex.groupBy"
+
+			self.start(Observer(next: { value in
+				let key = grouping(value)
+
+				lock.lock()
+				var group = groups[key]
+				if group == nil {
+					let (producer, sink) = SignalProducer<Value, Error>.buffer()
+					observer.sendNext(key, producer)
+
+					groups[key] = sink
+					group = sink
+				}
+				lock.unlock()
+
+				group!.sendNext(value)
+
+				}, failed: { error in
+					observer.sendFailed(error)
+					groups.values.forEach { $0.sendFailed(error) }
+
+				}, completed: { _ in
+					observer.sendCompleted()
+					groups.values.forEach { $0.sendCompleted() }
+
+				}, interrupted: { _ in
+					observer.sendInterrupted()
+					groups.values.forEach { $0.sendInterrupted() }
+			}))
+		}
+	}
+
+	/// Returns a producer that drops `Error` sending `replacement` terminal event
+	/// instead, defaulting to `Completed`.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func deferred(interval: NSTimeInterval, onScheduler scheduler: DateSchedulerType) -> SignalProducer<Value, Error> {
-        return SignalProducer.empty
-            .delay(interval, onScheduler: scheduler)
-            .concat(self.producer)
-    }
+	public func ignoreError(replacement replacement: Event<Value, NoError> = .Completed) -> SignalProducer<Value, NoError> {
+		precondition(replacement.isTerminating)
+		return lift { $0.ignoreError(replacement: replacement) }
+	}
 
-    /// Delays retrying on failure by `interval` up to `count` attempts.
+	/// Returns the latest 'size' values that were emitted from the producer.
+	/// The new producer start emiting when at least 'size' values were emitted
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func deferredRetry(interval: NSTimeInterval, onScheduler scheduler: DateSchedulerType, count: Int = .max) -> SignalProducer<Value, Error> {
-        precondition(count >= 0)
+	public func latestValues(size: Int) -> SignalProducer<Value, Error> {
+		var array:[Value] = []
+		return self.map() {
+			value in
+			array.append(value)
 
-        if count == 0 {
-            return producer
-        }
+			if array.count >= size {
+				array.removeFirst(array.count - size)
+			}
 
-        var retries = count
-        return flatMapError { error in
-                // The final attempt shouldn't defer the error if it fails
-                var producer = SignalProducer<Value, Error>(error: error)
-                if retries > 0 {
-                    producer = producer.deferred(interval, onScheduler: scheduler)
-                }
+			return array
+			}
+			.filter() { $0.count == size }
+	}
 
-                retries -= 1
-                return producer
-            }
-            .retry(count)
-    }
-    
-    /// Returns the latest 'size' values that were emitted from the producer. 
-    /// The new producer start emiting when at least 'size' values were emitted
+	/// Forwards a value and then mutes the producer by dropping all subsequent values
+	/// for `interval` seconds. Once time elapses the next new value will be forwarded
+	/// and repeat the muting process. Error events are immediately forwarded even while
+	/// the producer is muted.
+	///
+	/// This operator could be used to coalesce multiple notifications in a short time
+	/// frame by only showing the first one.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func latestValues(size: Int) -> SignalProducer<Value, Error> {
-        var array:[Value] = []
-        return self.map() {
-                value in
-                array.append(value)
-            
-                if array.count >= size {
-                    array.removeFirst(array.count - size)
-                }
-            
-                return array
-            }
-            .filter() { $0.count == size }
-    }
+	public func muteFor(interval: NSTimeInterval, clock: DateSchedulerType) -> SignalProducer<Value, Error> {
+		return lift { $0.muteFor(interval, clock: clock) }
+	}
+
+	/// Forwards events from self until `interval`. Then if producer isn't completed yet,
+	/// terminates with `event` on `scheduler`.
+	///
+	/// If the interval is 0, the timeout will be scheduled immediately. The producer
+	/// must complete synchronously (or on a faster scheduler) to avoid the timeout.
+	@warn_unused_result(message="Did you forget to call `start` on the producer?")
+	public func timeoutAfter(interval: NSTimeInterval, withEvent event: Event<Value, Error>, onScheduler scheduler: DateSchedulerType) -> SignalProducer<Value, Error> {
+		return lift { $0.timeoutAfter(interval, withEvent: event, onScheduler: scheduler) }
+	}
 }
 
 extension SignalProducerType where Value: SequenceType {
-    /// Returns a producer that flattens sequences of elements. The inverse of `collect`.
+	/// Returns a producer that flattens sequences of elements. The inverse of `collect`.
 	@warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func uncollect() -> SignalProducer<Value.Generator.Element, Error> {
-        return lift { $0.uncollect() }
-    }
+	public func uncollect() -> SignalProducer<Value.Generator.Element, Error> {
+		return lift { $0.uncollect() }
+	}
 }
 

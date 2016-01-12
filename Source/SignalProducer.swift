@@ -122,6 +122,23 @@ extension SignalProducerType {
             }
             .retry(count)
     }
+    
+    /// Returns the latest 'size' values that were emitted from the producer. 
+    /// The new producer start emiting when at least 'size' values were emitted
+    public func latestValues(size: Int) -> SignalProducer<Value, Error> {
+        var array:[Value] = []
+        return self.map() {
+                value in
+                array.append(value)
+            
+                if array.count >= size {
+                    array.removeFirst(array.count - size)
+                }
+            
+                return array
+            }
+            .filter() { $0.count == size }
+    }
 }
 
 extension SignalProducerType where Value: SequenceType {

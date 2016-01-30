@@ -15,6 +15,10 @@
 		8295FD871B87309F007C9000 /* UIControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD851B873081007C9000 /* UIControlTests.swift */; };
 		8295FD8A1B87352D007C9000 /* UIButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD881B873490007C9000 /* UIButtonTests.swift */; };
 		8295FD8D1B87374A007C9000 /* UIBarButtonItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */; };
+		833859951C3E9B8B00EE372F /* NSControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833859941C3E9B8B00EE372F /* NSControl.swift */; };
+		833859971C3E9FEC00EE372F /* NSPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833859961C3E9FEC00EE372F /* NSPopUpButton.swift */; };
+		8338599A1C3EA15A00EE372F /* NSControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833859991C3EA15A00EE372F /* NSControlTests.swift */; };
+		8338599C1C3EA23B00EE372F /* NSTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8338599B1C3EA23B00EE372F /* NSTextFieldTests.swift */; };
 		C7932E831C4B3F3000086F3C /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E811C4B3EDB00086F3C /* UITextField.swift */; };
 		C7932E841C4B41E100086F3C /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E811C4B3EDB00086F3C /* UITextField.swift */; };
 		C7932E871C4B42F500086F3C /* UITextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E851C4B420A00086F3C /* UITextFieldTests.swift */; };
@@ -178,6 +182,10 @@
 		8295FD851B873081007C9000 /* UIControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControlTests.swift; sourceTree = "<group>"; };
 		8295FD881B873490007C9000 /* UIButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonTests.swift; sourceTree = "<group>"; };
 		8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemTests.swift; sourceTree = "<group>"; };
+		833859941C3E9B8B00EE372F /* NSControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSControl.swift; path = AppKit/NSControl.swift; sourceTree = "<group>"; };
+		833859961C3E9FEC00EE372F /* NSPopUpButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSPopUpButton.swift; path = AppKit/NSPopUpButton.swift; sourceTree = "<group>"; };
+		833859991C3EA15A00EE372F /* NSControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSControlTests.swift; sourceTree = "<group>"; };
+		8338599B1C3EA23B00EE372F /* NSTextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTextFieldTests.swift; sourceTree = "<group>"; };
 		C7932E811C4B3EDB00086F3C /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		C7932E851C4B420A00086F3C /* UITextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldTests.swift; sourceTree = "<group>"; };
 		D8003E921AFEC3D400D7D3C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -287,6 +295,17 @@
 			isa = PBXGroup;
 			children = (
 				4238D5951B4D5950008534C0 /* NSTextField.swift */,
+				833859941C3E9B8B00EE372F /* NSControl.swift */,
+				833859961C3E9FEC00EE372F /* NSPopUpButton.swift */,
+			);
+			name = AppKit;
+			sourceTree = "<group>";
+		};
+		833859981C3EA14400EE372F /* AppKit */ = {
+			isa = PBXGroup;
+			children = (
+				833859991C3EA15A00EE372F /* NSControlTests.swift */,
+				8338599B1C3EA23B00EE372F /* NSTextFieldTests.swift */,
 			);
 			name = AppKit;
 			sourceTree = "<group>";
@@ -327,6 +346,7 @@
 		D8003E9D1AFEC3D400D7D3C5 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				833859981C3EA14400EE372F /* AppKit */,
 				D8A454081BD2772700C9E790 /* PropertyTests.swift */,
 				D8003EBE1AFED2F800D7D3C5 /* SignalTests.swift */,
 				D8003EC01AFED30100D7D3C5 /* SignalProducerTests.swift */,
@@ -732,11 +752,13 @@
 				D86FFBDA1B34B3F0001A89B3 /* Action.swift in Sources */,
 				D86FFBD11B34AD6F001A89B3 /* Association.swift in Sources */,
 				D8003EB91AFEC7A900D7D3C5 /* SignalProducer.swift in Sources */,
+				833859951C3E9B8B00EE372F /* NSControl.swift in Sources */,
 				D8003EBD1AFED01000D7D3C5 /* Signal.swift in Sources */,
 				D8F097441B17F3C8002E15BA /* NSObject.swift in Sources */,
 				D8F0973B1B17F2F7002E15BA /* NSData.swift in Sources */,
 				4238D5961B4D5950008534C0 /* NSTextField.swift in Sources */,
 				D8F0973D1B17F30D002E15BA /* NSUserDefaults.swift in Sources */,
+				833859971C3E9FEC00EE372F /* NSPopUpButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,10 +766,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8338599C1C3EA23B00EE372F /* NSTextFieldTests.swift in Sources */,
 				D8F0974A1B17F5E1002E15BA /* NSObjectTests.swift in Sources */,
 				D8003EC21AFED30F00D7D3C5 /* SignalTests.swift in Sources */,
 				D8003EC31AFED30F00D7D3C5 /* SignalProducerTests.swift in Sources */,
 				D8A454091BD2772700C9E790 /* PropertyTests.swift in Sources */,
+				8338599A1C3EA15A00EE372F /* NSControlTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

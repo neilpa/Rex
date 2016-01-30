@@ -19,6 +19,9 @@
 		833859971C3E9FEC00EE372F /* NSPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833859961C3E9FEC00EE372F /* NSPopUpButton.swift */; };
 		8338599A1C3EA15A00EE372F /* NSControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833859991C3EA15A00EE372F /* NSControlTests.swift */; };
 		8338599C1C3EA23B00EE372F /* NSTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8338599B1C3EA23B00EE372F /* NSTextFieldTests.swift */; };
+		C7932E831C4B3F3000086F3C /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E811C4B3EDB00086F3C /* UITextField.swift */; };
+		C7932E841C4B41E100086F3C /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E811C4B3EDB00086F3C /* UITextField.swift */; };
+		C7932E871C4B42F500086F3C /* UITextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E851C4B420A00086F3C /* UITextFieldTests.swift */; };
 		D8003E941AFEC3D400D7D3C5 /* Rex.h in Headers */ = {isa = PBXBuildFile; fileRef = D8003E931AFEC3D400D7D3C5 /* Rex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8003EB41AFEC6B000D7D3C5 /* ReactiveCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8003EAD1AFEC68A00D7D3C5 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D8003EB51AFEC6B000D7D3C5 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8003EAE1AFEC68A00D7D3C5 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -183,6 +186,8 @@
 		833859961C3E9FEC00EE372F /* NSPopUpButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSPopUpButton.swift; path = AppKit/NSPopUpButton.swift; sourceTree = "<group>"; };
 		833859991C3EA15A00EE372F /* NSControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSControlTests.swift; sourceTree = "<group>"; };
 		8338599B1C3EA23B00EE372F /* NSTextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTextFieldTests.swift; sourceTree = "<group>"; };
+		C7932E811C4B3EDB00086F3C /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		C7932E851C4B420A00086F3C /* UITextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldTests.swift; sourceTree = "<group>"; };
 		D8003E921AFEC3D400D7D3C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8003E931AFEC3D400D7D3C5 /* Rex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rex.h; sourceTree = "<group>"; };
 		D8003E9F1AFEC3D400D7D3C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -404,6 +409,7 @@
 				D86FFBD71B34B242001A89B3 /* UILabel.swift */,
 				8289A2E21BD7EF740097FB60 /* UIImageView.swift */,
 				8289A2E41BD7F6DD0097FB60 /* UIView.swift */,
+				C7932E811C4B3EDB00086F3C /* UITextField.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -438,6 +444,7 @@
 				D8F073141B861B3A0047D546 /* UILabelTests.swift */,
 				8289A2E01BD7EF1F0097FB60 /* UIImageViewTests.swift */,
 				8289A2E61BD7F7730097FB60 /* UIViewTests.swift */,
+				C7932E851C4B420A00086F3C /* UITextFieldTests.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -775,6 +782,7 @@
 				D86FFBD81B34B242001A89B3 /* UILabel.swift in Sources */,
 				D86FFBDB1B34B3F0001A89B3 /* Action.swift in Sources */,
 				D86FFBD21B34AD7A001A89B3 /* Association.swift in Sources */,
+				C7932E831C4B3F3000086F3C /* UITextField.swift in Sources */,
 				8289A2E31BD7EF740097FB60 /* UIImageView.swift in Sources */,
 				D8F0973E1B17F30D002E15BA /* NSUserDefaults.swift in Sources */,
 				D834572D1AFEE45B0070616A /* Signal.swift in Sources */,
@@ -798,6 +806,7 @@
 				D8F0974B1B17F5E2002E15BA /* NSObjectTests.swift in Sources */,
 				8289A2E81BD7F7900097FB60 /* UIViewTests.swift in Sources */,
 				D8F073161B863CE70047D546 /* UILabelTests.swift in Sources */,
+				C7932E871C4B42F500086F3C /* UITextFieldTests.swift in Sources */,
 				8295FD8A1B87352D007C9000 /* UIButtonTests.swift in Sources */,
 				D8A4540A1BD2772700C9E790 /* PropertyTests.swift in Sources */,
 				D83457301AFEE45E0070616A /* SignalProducerTests.swift in Sources */,
@@ -829,6 +838,7 @@
 				D8715DBB1C2112D1005F4191 /* Property.swift in Sources */,
 				D8715DCA1C211553005F4191 /* UILabel.swift in Sources */,
 				D8715DCB1C211553005F4191 /* UIImageView.swift in Sources */,
+				C7932E841C4B41E100086F3C /* UITextField.swift in Sources */,
 				D8715DC61C211553005F4191 /* UIBarButtonItem.swift in Sources */,
 				D8715DBD1C2112D1005F4191 /* SignalProducer.swift in Sources */,
 				D8715DBE1C2112D6005F4191 /* Association.swift in Sources */,

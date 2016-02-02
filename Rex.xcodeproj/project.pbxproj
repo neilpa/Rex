@@ -44,6 +44,8 @@
 		83B8FB4B1C60F7220075D9AF /* NSPopUpButton+Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB461C60F7220075D9AF /* NSPopUpButton+Bindable.swift */; };
 		83B8FB4C1C60F7220075D9AF /* NSSlider+Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB471C60F7220075D9AF /* NSSlider+Bindable.swift */; };
 		83B8FB4D1C60F7220075D9AF /* NSTextField+Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB481C60F7220075D9AF /* NSTextField+Bindable.swift */; };
+		83B8FB531C6102F10075D9AF /* NSSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB4F1C6102F10075D9AF /* NSSlider.swift */; };
+		83B8FB551C6102F10075D9AF /* NSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB511C6102F10075D9AF /* NSViewController.swift */; };
 		C7932E831C4B3F3000086F3C /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E811C4B3EDB00086F3C /* UITextField.swift */; };
 		C7932E841C4B41E100086F3C /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E811C4B3EDB00086F3C /* UITextField.swift */; };
 		C7932E871C4B42F500086F3C /* UITextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E851C4B420A00086F3C /* UITextFieldTests.swift */; };
@@ -221,6 +223,8 @@
 		83B8FB461C60F7220075D9AF /* NSPopUpButton+Bindable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSPopUpButton+Bindable.swift"; path = "Bindings/AppKit/NSPopUpButton+Bindable.swift"; sourceTree = "<group>"; };
 		83B8FB471C60F7220075D9AF /* NSSlider+Bindable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSSlider+Bindable.swift"; path = "Bindings/AppKit/NSSlider+Bindable.swift"; sourceTree = "<group>"; };
 		83B8FB481C60F7220075D9AF /* NSTextField+Bindable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSTextField+Bindable.swift"; path = "Bindings/AppKit/NSTextField+Bindable.swift"; sourceTree = "<group>"; };
+		83B8FB4F1C6102F10075D9AF /* NSSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSSlider.swift; path = AppKit/NSSlider.swift; sourceTree = "<group>"; };
+		83B8FB511C6102F10075D9AF /* NSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSViewController.swift; path = AppKit/NSViewController.swift; sourceTree = "<group>"; };
 		C7932E811C4B3EDB00086F3C /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		C7932E851C4B420A00086F3C /* UITextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldTests.swift; sourceTree = "<group>"; };
 		D8003E921AFEC3D400D7D3C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -329,6 +333,8 @@
 		4238D5941B4D593E008534C0 /* AppKit */ = {
 			isa = PBXGroup;
 			children = (
+				83B8FB4F1C6102F10075D9AF /* NSSlider.swift */,
+				83B8FB511C6102F10075D9AF /* NSViewController.swift */,
 				4238D5951B4D5950008534C0 /* NSTextField.swift */,
 				833859941C3E9B8B00EE372F /* NSControl.swift */,
 				833859961C3E9FEC00EE372F /* NSPopUpButton.swift */,
@@ -822,7 +828,9 @@
 				D8003EBD1AFED01000D7D3C5 /* Signal.swift in Sources */,
 				D8F097441B17F3C8002E15BA /* NSObject.swift in Sources */,
 				83B8FB4B1C60F7220075D9AF /* NSPopUpButton+Bindable.swift in Sources */,
+				83B8FB551C6102F10075D9AF /* NSViewController.swift in Sources */,
 				D8F0973B1B17F2F7002E15BA /* NSData.swift in Sources */,
+				83B8FB531C6102F10075D9AF /* NSSlider.swift in Sources */,
 				83B8FB4C1C60F7220075D9AF /* NSSlider+Bindable.swift in Sources */,
 				4238D5961B4D5950008534C0 /* NSTextField.swift in Sources */,
 				83B8FB3C1C60F7100075D9AF /* PropertyBinding.swift in Sources */,

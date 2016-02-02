@@ -10,7 +10,7 @@ import Foundation
 import ReactiveCocoa
 
 extension NSTextField {
-    var rex_stringValueBinding: ConsumerBinding<String> {
+    public var rex_stringValueBinding: ConsumerBinding<String> {
         return associatedObject(self, key: &stringValueBindingKey) { textField in
             ConsumerBinding() { value in
                 switch value {

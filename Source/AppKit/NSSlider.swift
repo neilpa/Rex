@@ -10,11 +10,11 @@ import Foundation
 import ReactiveCocoa
 
 extension NSSlider {
-    var rex_doubleValueAction: Action<NSSlider, Double, NoError> {
+    public var rex_doubleValueAction: Action<NSSlider, Double, NoError> {
         return associatedObject(self, key: &doubleValueActionKey) { _ in Action<NSSlider, Double, NoError> { SignalProducer(value: $0.doubleValue) } }
     }
     
-    var rex_doubleValues: Signal<Double, NoError> {
+    public var rex_doubleValues: Signal<Double, NoError> {
         let cocoaAction = associatedObject(self, key: &doubleValueCocoaActionKey) { CocoaAction($0.rex_doubleValueAction) { $0 as! NSSlider } }
         rex_action.value = cocoaAction
         

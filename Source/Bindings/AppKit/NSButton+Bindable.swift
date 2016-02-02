@@ -10,7 +10,7 @@ import Foundation
 import ReactiveCocoa
 
 extension NSButton {
-    var rex_stateBinding: ConsumerBinding<Int> {
+    public var rex_stateBinding: ConsumerBinding<Int> {
         return associatedObject(self, key: &stateBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {

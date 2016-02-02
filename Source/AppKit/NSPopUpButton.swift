@@ -29,22 +29,22 @@ extension NSPopUpButton {
             })
     }
     
-    var rex_selectedIndexAction: Action<NSPopUpButton, Int, NoError> {
+    public var rex_selectedIndexAction: Action<NSPopUpButton, Int, NoError> {
         return associatedObject(self, key: &selectedIndexActionKey) { _ in Action<NSPopUpButton, Int, NoError> { SignalProducer(value: $0.indexOfSelectedItem) } }
     }
     
-    var rex_selectedIndexes: Signal<Int, NoError> {
+    public var rex_selectedIndexes: Signal<Int, NoError> {
         let cocoaAction = associatedObject(self, key: &selectedIndexKey) { CocoaAction($0.rex_selectedIndexAction) { $0 as! NSPopUpButton } }
         rex_action.value = cocoaAction
         
         return rex_selectedIndexAction.values
     }
     
-    var rex_selectedTagAction: Action<NSPopUpButton, Int, NoError> {
+    public var rex_selectedTagAction: Action<NSPopUpButton, Int, NoError> {
         return associatedObject(self, key: &selectedTagActionKey) { _ in Action<NSPopUpButton, Int, NoError> { SignalProducer(value: $0.selectedTag()) } }
     }
     
-    var rex_selectedTags: Signal<Int, NoError> {
+    public var rex_selectedTags: Signal<Int, NoError> {
         let cocoaAction = associatedObject(self, key: &selectedTagKey) { CocoaAction($0.rex_selectedTagAction) { $0 as! NSPopUpButton } }
         rex_action.value = cocoaAction
         

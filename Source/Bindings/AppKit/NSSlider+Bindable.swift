@@ -10,7 +10,7 @@ import Foundation
 import ReactiveCocoa
 
 extension NSSlider {
-    var rex_doubleValueBinding : ConsumerBinding<Double> {
+    public var rex_doubleValueBinding : ConsumerBinding<Double> {
         return associatedObject(self, key: &doubleValueBindingKey) { slider in
             ConsumerBinding() { value in
                 if case let .Value(v) = value {

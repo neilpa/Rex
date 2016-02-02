@@ -11,7 +11,7 @@ import ReactiveCocoa
 
 extension NSPopUpButton {
 
-    var rex_menuItemsBinding: ConsumerBinding<[NSMenuItem]> {
+    public var rex_menuItemsBinding: ConsumerBinding<[NSMenuItem]> {
         return associatedObject(self, key: &menuItemsBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {
@@ -25,7 +25,7 @@ extension NSPopUpButton {
         }
     }
 
-    var rex_selectedIndexBinding: ConsumerBinding<Int> {
+    public var rex_selectedIndexBinding: ConsumerBinding<Int> {
         return associatedObject(self, key: &selectedIndexBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {
@@ -40,7 +40,7 @@ extension NSPopUpButton {
         }
     }
     
-    var rex_selectedTagBinding: ConsumerBinding<Int> {
+    public var rex_selectedTagBinding: ConsumerBinding<Int> {
         return associatedObject(self, key: &selectedTagBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {

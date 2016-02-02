@@ -12,7 +12,7 @@ import ReactiveCocoa
 extension NSViewController {
 
     /// Provides a "trigger signal" to allow us easier access to viewWillDisappear calls
-    var rex_viewWillDisappear: Signal<Void, NoError> {
+    public var rex_viewWillDisappear: Signal<Void, NoError> {
         return associatedObject(self, key: &viewWillDisappearKey) {
             var returnedSignal: Signal<Void, NoError>!
             

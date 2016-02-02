@@ -10,7 +10,7 @@ import Foundation
 import ReactiveCocoa
 
 extension NSControl {
-    var rex_enabledBinding: ConsumerBinding<Bool> {
+    public var rex_enabledBinding: ConsumerBinding<Bool> {
         return associatedObject(self, key: &enabledBindingKey) { control in
             ConsumerBinding() { value in
                 switch value {

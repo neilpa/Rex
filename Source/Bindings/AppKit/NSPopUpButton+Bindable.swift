@@ -53,7 +53,7 @@ extension NSPopUpButton {
         }
     }
     
-    var rex_menuItemBinding: ConsumerBinding<NSMenuItem> {
+    public var rex_menuItemBinding: ConsumerBinding<NSMenuItem> {
         return associatedObject(self, key: &menuItemBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {

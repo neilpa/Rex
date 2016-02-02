@@ -8,14 +8,13 @@
 
 import Foundation
 import ReactiveCocoa
-import Rex
 
 extension NSButton {
-    var rex_stateAction: Action<NSButton, Int, NoError> {
+    public var rex_stateAction: Action<NSButton, Int, NoError> {
         return associatedObject(self, key: &stateActionKey) { _ in Action<NSButton, Int, NoError> { SignalProducer(value: $0.state) } }
     }
     
-    var rex_states: Signal<Int, NoError> {
+    public var rex_states: Signal<Int, NoError> {
         let cocoaAction = associatedObject(self, key: &stateCocoaActionKey) { CocoaAction($0.rex_stateAction) { $0 as! NSButton } }
         rex_action.value = cocoaAction
         

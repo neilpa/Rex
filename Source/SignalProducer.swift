@@ -123,30 +123,28 @@ extension SignalProducerType {
             }
             .retry(count)
     }
-    
-    
-    
+	
     /// Collects the latest `N` values from a `SignalProducer` and emits them as an array
-    @warn_unused_result(message = "Did you forget to call 'start' on the producer?")
-    public func latestValues(n: Int) -> SignalProducer<[Value], Error> {
-        var array: [Value] = []
-        let lock = NSRecursiveLock()
-        lock.name = "me.neilpa.rex.latestValues"
+	@warn_unused_result(message = "Did you forget to call 'start' on the producer?")
+	public func latestValues(n: Int) -> SignalProducer<[Value], Error> {
+		var array: [Value] = []
+		let lock = NSRecursiveLock()
+		lock.name = "me.neilpa.rex.latestValues"
         
-        return self.map({ value -> [Value] in
-            lock.lock()
-            array.append(value)
+		return self.map({ value -> [Value] in
+			lock.lock()
+			array.append(value)
+			
+			if array.count >= n {
+				array.removeFirst(array.count - n)
+			}
+			lock.unlock()
             
-            if array.count >= n {
-                array.removeFirst(array.count - n)
-            }
-            lock.unlock()
-            
-            return array
-        }).filter({ values in
-            return values.count == n
-        })
-    }
+			return array
+		}).filter({ values in
+			return values.count == n
+		})
+	}
 }
 
 extension SignalProducerType where Value: SequenceType {

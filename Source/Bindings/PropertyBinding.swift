@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveCocoa
+import Result
 
 /// A `PropertyBinding` matches up a property with a function that validates incoming values to the property, and wraps the two into a new `MutablePropertyType` that can be treated as its own property, and bound to.
 public final class PropertyBinding<Property: MutablePropertyType> {

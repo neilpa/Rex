@@ -8,15 +8,17 @@
 
 import Foundation
 import ReactiveCocoa
+import Result
 
 extension NSViewController {
 
     /// Provides a "trigger signal" to allow us easier access to viewWillDisappear calls
+    @available(OSX 10.10, *)
     public var rex_viewWillDisappear: Signal<Void, NoError> {
         return associatedObject(self, key: &viewWillDisappearKey) {
             var returnedSignal: Signal<Void, NoError>!
             
-            $0.rac_signalForSelector(Selector("viewWillDisappear"))
+            $0.rac_signalForSelector(#selector(NSViewController.viewWillDisappear))
                 .toSignalProducer()
                 .map { _ in () }
                 .flatMapError { error in

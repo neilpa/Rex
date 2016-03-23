@@ -7,6 +7,7 @@
 //
 
 import ReactiveCocoa
+import Result
 
 extension Action {
     /// Creates an always disabled action.

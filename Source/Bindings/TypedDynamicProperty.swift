@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveCocoa
+import Result
 
 /// Wraps a `DynamicProperty` instance in an effort to handle the casting that is often required when bridging from the KVO-powered class.
 public final class TypedDynamicProperty<Value> : MutablePropertyType {

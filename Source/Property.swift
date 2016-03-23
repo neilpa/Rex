@@ -7,6 +7,7 @@
 //
 
 import ReactiveCocoa
+import Result
 
 extension PropertyType where Value == Bool {
     /// The conjunction of `self` and `other`.

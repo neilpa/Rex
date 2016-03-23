@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import ReactiveCocoa
+import Result
 
 extension NSControl {
     /// Exposes a property that binds an action to the control's target/action. The action 

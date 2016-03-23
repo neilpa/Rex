@@ -11,8 +11,8 @@ import ReactiveCocoa
 
 /// A consumer of `BindingValue`s
 public protocol BindingValueConsumer {
-    typealias Value
-    typealias Error: ErrorType
+    associatedtype Value
+    associatedtype Error: ErrorType
     
     /// Bind the object to a producer of `BindingValue`s
     func bindToProducer(producer: SignalProducer<BindingValue<Value>, Error>)

@@ -8,6 +8,7 @@
 
 import ReactiveCocoa
 import UIKit
+import Result
 
 extension UIControl {
 #if os(iOS)

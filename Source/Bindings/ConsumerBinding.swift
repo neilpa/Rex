@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveCocoa
+import Result
 
 /// The `ConsumerBinding` represents a single point where values can be "bound" to a UI object that consumes the specified `Value` type and executes control-specific behavior upon receipt of those values.
 ///

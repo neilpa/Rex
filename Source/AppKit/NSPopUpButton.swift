@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import ReactiveCocoa
+import Result
 
 extension NSPopUpButton {
     public var rex_indexOfSelectedItem: MutableProperty<Int> {

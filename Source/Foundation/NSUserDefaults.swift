@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveCocoa
+import Result
 
 extension NSUserDefaults {
     /// Sends value of `key` whenever it changes. Attempts to filter out repeats

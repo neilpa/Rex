@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import ReactiveCocoa
+import Result
 
 extension NSTextField {
     /// Sends the text field's string value as it changes. Equivalent to the "continuous"

@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveCocoa
+import Result
 
 extension NSSlider {
     public var rex_doubleValueAction: Action<NSSlider, Double, NoError> {

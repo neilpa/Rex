@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveCocoa
+import Result
 
 extension NSButton {
     public var rex_stateAction: Action<NSButton, Int, NoError> {

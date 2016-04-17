@@ -36,6 +36,21 @@ final class NSObjectTests: XCTestCase {
                 expectation.fulfill()
         }
     }
+	
+	func testSignalForSelector(){
+		
+		let expectation = self.expectationWithDescription("Expected rex_signalForSelector when selector will be called.")
+		defer { self.waitForExpectationsWithTimeout(2, handler: nil) }
+		
+		let obj = NSObject()
+		
+		obj.rex_signalForSelector(#selector(isEqual(_:)))
+			.observeNext{ _ in
+				expectation.fulfill()
+			}
+		
+		obj.isEqual(nil)
+	}
 }
 
 final class NSObjectDeallocTests: XCTestCase {

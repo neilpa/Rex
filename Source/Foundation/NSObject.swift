@@ -34,4 +34,29 @@ extension NSObject {
             .rac_willDeallocSignal()
             .rex_toTriggerSignal()
     }
+	
+	
+	/// Returns a signal which will send a tuple of arguments upon each invocation of
+	/// the selector, then completes when the receiver is deallocated. `next` events
+	/// will be sent synchronously from the thread that invoked the method. If
+	/// a runtime call fails, the signal will send an error in the
+	/// RACSelectorSignalErrorDomain.
+	/// It can be used for example to catch `@IBAction func`.
+	@warn_unused_result(message="Did you forget to call `observe` on the signal?")
+	public func rex_signalForSelector(selector: Selector) -> Signal<(AnyObject?, AnyObject?, AnyObject?, AnyObject?, AnyObject?, AnyObject?), NSError> {
+		return self
+			.rac_signalForSelector(selector)
+			.rex_toSignal()
+			.map{
+				let tuple = $0 as? RACTuple
+				guard let first = tuple?.first else		{ return (nil, nil, nil, nil, nil, nil) }
+				guard let second = tuple?.second else	{ return (first, nil, nil, nil, nil, nil) }
+				guard let third = tuple?.third else		{ return (first, second, nil, nil, nil, nil) }
+				guard let fourth = tuple?.fourth else	{ return (first, second, third, nil, nil, nil) }
+				guard let fifth = tuple?.fifth else		{ return (first, second, third, fourth, nil, nil) }
+				guard let last = tuple?.last else		{ return (first, second, third, fourth, fifth, nil) }
+				
+				return (first, second, third, fourth, fifth, last)
+		}
+	}
 }

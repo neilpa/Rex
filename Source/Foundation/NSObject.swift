@@ -42,6 +42,7 @@ extension NSObject {
 	/// a runtime call fails, the signal will send an error in the
 	/// RACSelectorSignalErrorDomain.
 	/// It can be used for example to catch `@IBAction func`.
+	@warn_unused_result(message="Did you forget to call `observe` on the signal?")
 	public func rex_signalForSelector(selector: Selector) -> Signal<(AnyObject?, AnyObject?, AnyObject?, AnyObject?, AnyObject?, AnyObject?), NSError> {
 		return self
 			.rac_signalForSelector(selector)

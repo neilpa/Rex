@@ -17,6 +17,7 @@
 		8295FD871B87309F007C9000 /* UIControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD851B873081007C9000 /* UIControlTests.swift */; };
 		8295FD8A1B87352D007C9000 /* UIButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD881B873490007C9000 /* UIButtonTests.swift */; };
 		8295FD8D1B87374A007C9000 /* UIBarButtonItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */; };
+		84B603891CC7B93D006B6516 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B603881CC7B93D006B6516 /* UIScrollView.swift */; };
 		9DA915A41CA6301C003723B9 /* UIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A31CA6301C003723B9 /* UIDatePicker.swift */; };
 		9DA915A61CA63046003723B9 /* UIDatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */; };
 		C72CF3E51CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
@@ -192,6 +193,7 @@
 		8295FD851B873081007C9000 /* UIControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControlTests.swift; sourceTree = "<group>"; };
 		8295FD881B873490007C9000 /* UIButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonTests.swift; sourceTree = "<group>"; };
 		8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemTests.swift; sourceTree = "<group>"; };
+		84B603881CC7B93D006B6516 /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		9DA915A31CA6301C003723B9 /* UIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDatePicker.swift; sourceTree = "<group>"; };
 		9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDatePickerTests.swift; sourceTree = "<group>"; };
 		C72CF3E41CBF188A00E19897 /* RACSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACSignal.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				C7DCE2B21CB3C872001217D8 /* UITextView.swift */,
 				8289A2E41BD7F6DD0097FB60 /* UIView.swift */,
 				C7945F101CC192E800DC9E37 /* UIViewController.swift */,
+				84B603881CC7B93D006B6516 /* UIScrollView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				D8F0973E1B17F30D002E15BA /* NSUserDefaults.swift in Sources */,
 				D834572D1AFEE45B0070616A /* Signal.swift in Sources */,
 				D8E4A6211B7BBB2100EAD8A8 /* UIBarItem.swift in Sources */,
+				84B603891CC7B93D006B6516 /* UIScrollView.swift in Sources */,
 				7D2AA99B1CB6EFEB008AB5C9 /* UISwitch.swift in Sources */,
 				C72CF3E61CBF188A00E19897 /* RACSignal.swift in Sources */,
 				D8A454071BD26A1A00C9E790 /* Property.swift in Sources */,

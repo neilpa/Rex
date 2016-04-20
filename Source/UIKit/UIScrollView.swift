@@ -21,7 +21,13 @@ extension UIScrollView {
 	public var rex_contentSize: MutableProperty<CGSize> {
 		return associatedProperty(self, key: &contentSizeKey, initial: { $0.contentSize }, setter: { $0.contentSize = $1 })
 	}
+	
+	/// Wraps a scrollview's `contentInset` value in a bindable property.
+	public var rex_contentInset: MutableProperty<UIEdgeInsets> {
+		return associatedProperty(self, key: &contentInsetKey, initial: { $0.contentInset }, setter: { $0.contentInset = $1 })
+	}
 }
 
 private var contentOffsetKey: UInt8 = 0
 private var contentSizeKey: UInt8 = 0
+private var contentInsetKey: UInt8 = 0

@@ -10,11 +10,9 @@ import ReactiveCocoa
 import UIKit
 
 extension UIScrollView {
-	public typealias Animated = Bool
-	
 	/// Wraps a scrollview's `contentOffset` value in a bindable property.
-	public var rex_contentOffset: MutableProperty<(CGPoint, Animated)> {
-		return associatedProperty(self, key: &contentOffsetKey, initial: { ($0.contentOffset, false) }, setter: { $0.setContentOffset($1.0, animated: $1.1) })
+	public var rex_contentOffset: MutableProperty<CGPoint> {
+		return associatedProperty(self, key: &contentOffsetKey, initial: { $0.contentOffset }, setter: { $0.contentOffset = $1 })
 	}
 	
 	/// Wraps a scrollview's `contentSize` value in a bindable property.

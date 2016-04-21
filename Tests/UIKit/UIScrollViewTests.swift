@@ -26,7 +26,7 @@ class UIScrollViewTests: XCTestCase {
 		
 		let offset = CGPoint(x: 1.0, y: 1.0)
 		
-		scrollView.rex_contentOffset <~ SignalProducer(value: (offset, false))
+		scrollView.rex_contentOffset <~ SignalProducer(value: offset)
 		XCTAssert(_scrollView?.contentOffset == offset)
 	}
 	

@@ -31,6 +31,8 @@
 		8295FD871B87309F007C9000 /* UIControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD851B873081007C9000 /* UIControlTests.swift */; };
 		8295FD8A1B87352D007C9000 /* UIButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD881B873490007C9000 /* UIButtonTests.swift */; };
 		8295FD8D1B87374A007C9000 /* UIBarButtonItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */; };
+		84B603891CC7B93D006B6516 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B603881CC7B93D006B6516 /* UIScrollView.swift */; };
+		84B6038B1CC7D27D006B6516 /* UIScrollViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6038A1CC7D27D006B6516 /* UIScrollViewTests.swift */; };
 		9DA915A41CA6301C003723B9 /* UIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A31CA6301C003723B9 /* UIDatePicker.swift */; };
 		9DA915A61CA63046003723B9 /* UIDatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */; };
 		C72CF3E51CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
@@ -213,6 +215,8 @@
 		8295FD851B873081007C9000 /* UIControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControlTests.swift; sourceTree = "<group>"; };
 		8295FD881B873490007C9000 /* UIButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonTests.swift; sourceTree = "<group>"; };
 		8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemTests.swift; sourceTree = "<group>"; };
+		84B603881CC7B93D006B6516 /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
+		84B6038A1CC7D27D006B6516 /* UIScrollViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewTests.swift; sourceTree = "<group>"; };
 		9DA915A31CA6301C003723B9 /* UIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDatePicker.swift; sourceTree = "<group>"; };
 		9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDatePickerTests.swift; sourceTree = "<group>"; };
 		C72CF3E41CBF188A00E19897 /* RACSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACSignal.swift; sourceTree = "<group>"; };
@@ -441,6 +445,7 @@
 				C7DCE2B21CB3C872001217D8 /* UITextView.swift */,
 				8289A2E41BD7F6DD0097FB60 /* UIView.swift */,
 				C7945F101CC192E800DC9E37 /* UIViewController.swift */,
+				84B603881CC7B93D006B6516 /* UIScrollView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 				C7DCE2B51CB3C9C1001217D8 /* UITextViewTests.swift */,
 				8289A2E61BD7F7730097FB60 /* UIViewTests.swift */,
 				C7945F121CC1DFB400DC9E37 /* UIViewControllerTests.swift */,
+				84B6038A1CC7D27D006B6516 /* UIScrollViewTests.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -826,6 +832,7 @@
 				D8F0973E1B17F30D002E15BA /* NSUserDefaults.swift in Sources */,
 				D834572D1AFEE45B0070616A /* Signal.swift in Sources */,
 				D8E4A6211B7BBB2100EAD8A8 /* UIBarItem.swift in Sources */,
+				84B603891CC7B93D006B6516 /* UIScrollView.swift in Sources */,
 				7D2AA99B1CB6EFEB008AB5C9 /* UISwitch.swift in Sources */,
 				7DBD48F31CC8141D0077AD4F /* Reusable.swift in Sources */,
 				C72CF3E61CBF188A00E19897 /* RACSignal.swift in Sources */,
@@ -862,6 +869,7 @@
 				D83457301AFEE45E0070616A /* SignalProducerTests.swift in Sources */,
 				D83457411AFEE6050070616A /* SignalTests.swift in Sources */,
 				8295FD8D1B87374A007C9000 /* UIBarButtonItemTests.swift in Sources */,
+				84B6038B1CC7D27D006B6516 /* UIScrollViewTests.swift in Sources */,
 				8295FD871B87309F007C9000 /* UIControlTests.swift in Sources */,
 				C7DCE2B71CB3C9D6001217D8 /* UITextViewTests.swift in Sources */,
 			);

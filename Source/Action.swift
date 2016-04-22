@@ -14,6 +14,24 @@ extension Action {
     public static var rex_disabled: Action {
         return Action(enabledIf: ConstantProperty(false)) { _ in .empty }
     }
+    
+    /// Whether the action execution was started.
+    public var rex_started: Signal<Void, NoError> {
+        return self.executing.signal
+            .filterMap { $0 ? () : nil }
+    }
+
+    /// Whether the action execution was completed successfully.
+    public var rex_completed: Signal<Void, NoError> {
+        return events
+            .filterMap { event -> Void? in
+                if case .Completed = event {
+                    return ()
+                } else {
+                    return nil
+                }
+            }
+    }
 }
 
 extension CocoaAction {

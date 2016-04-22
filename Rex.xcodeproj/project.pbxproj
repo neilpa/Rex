@@ -33,6 +33,8 @@
 		8295FD8D1B87374A007C9000 /* UIBarButtonItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */; };
 		9DA915A41CA6301C003723B9 /* UIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A31CA6301C003723B9 /* UIDatePicker.swift */; };
 		9DA915A61CA63046003723B9 /* UIDatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */; };
+		C703915D1CCA753B009F0E02 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C700F0461CCA71E10090F74F /* UINavigationController.swift */; };
+		C703915F1CCA76A5009F0E02 /* UINavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703915E1CCA76A5009F0E02 /* UINavigationControllerTests.swift */; };
 		C72CF3E51CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
 		C72CF3E61CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
 		C72CF3E71CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
@@ -215,6 +217,8 @@
 		8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemTests.swift; sourceTree = "<group>"; };
 		9DA915A31CA6301C003723B9 /* UIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDatePicker.swift; sourceTree = "<group>"; };
 		9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDatePickerTests.swift; sourceTree = "<group>"; };
+		C700F0461CCA71E10090F74F /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		C703915E1CCA76A5009F0E02 /* UINavigationControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerTests.swift; sourceTree = "<group>"; };
 		C72CF3E41CBF188A00E19897 /* RACSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACSignal.swift; sourceTree = "<group>"; };
 		C7932E811C4B3EDB00086F3C /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		C7932E851C4B420A00086F3C /* UITextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldTests.swift; sourceTree = "<group>"; };
@@ -441,6 +445,7 @@
 				C7DCE2B21CB3C872001217D8 /* UITextView.swift */,
 				8289A2E41BD7F6DD0097FB60 /* UIView.swift */,
 				C7945F101CC192E800DC9E37 /* UIViewController.swift */,
+				C700F0461CCA71E10090F74F /* UINavigationController.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 				C7DCE2B51CB3C9C1001217D8 /* UITextViewTests.swift */,
 				8289A2E61BD7F7730097FB60 /* UIViewTests.swift */,
 				C7945F121CC1DFB400DC9E37 /* UIViewControllerTests.swift */,
+				C703915E1CCA76A5009F0E02 /* UINavigationControllerTests.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -833,6 +839,7 @@
 				D8E4A6201B7BBB1600EAD8A8 /* UIBarButtonItem.swift in Sources */,
 				D8F097451B17F3C8002E15BA /* NSObject.swift in Sources */,
 				C7945F111CC192E800DC9E37 /* UIViewController.swift in Sources */,
+				C703915D1CCA753B009F0E02 /* UINavigationController.swift in Sources */,
 				D834572E1AFEE45B0070616A /* SignalProducer.swift in Sources */,
 				C7DCE2B41CB3C89A001217D8 /* UITextView.swift in Sources */,
 				8289A2E51BD7F6DD0097FB60 /* UIView.swift in Sources */,
@@ -849,6 +856,7 @@
 				7DC325801CC6FD2100746D88 /* UITableViewHeaderFooterViewTests.swift in Sources */,
 				8289A2E11BD7EF1F0097FB60 /* UIImageViewTests.swift in Sources */,
 				D8F0974B1B17F5E2002E15BA /* NSObjectTests.swift in Sources */,
+				C703915F1CCA76A5009F0E02 /* UINavigationControllerTests.swift in Sources */,
 				7DCF5B361CC80E8E004AEE75 /* UICollectionReusableViewTests.swift in Sources */,
 				8289A2E81BD7F7900097FB60 /* UIViewTests.swift in Sources */,
 				D8F073161B863CE70047D546 /* UILabelTests.swift in Sources */,

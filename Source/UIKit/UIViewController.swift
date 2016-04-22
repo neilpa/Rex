@@ -6,7 +6,7 @@
 //  Copyright © 2016 Neil Pankey. All rights reserved.
 //
 
-import Result
+import enum Result.NoError
 import ReactiveCocoa
 import UIKit
 

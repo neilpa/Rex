@@ -42,6 +42,8 @@
 		C7932E871C4B42F500086F3C /* UITextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7932E851C4B420A00086F3C /* UITextFieldTests.swift */; };
 		C7945F111CC192E800DC9E37 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7945F101CC192E800DC9E37 /* UIViewController.swift */; };
 		C7945F141CC1DFBE00DC9E37 /* UIViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7945F121CC1DFB400DC9E37 /* UIViewControllerTests.swift */; };
+		C7D37AFC1CCA9BD3006530CF /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D37AFB1CCA9BD3006530CF /* UINavigationController.swift */; };
+		C7D37AFE1CCA9BFA006530CF /* UINavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D37AFD1CCA9BFA006530CF /* UINavigationControllerTests.swift */; };
 		C7DCE2B41CB3C89A001217D8 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCE2B21CB3C872001217D8 /* UITextView.swift */; };
 		C7DCE2B71CB3C9D6001217D8 /* UITextViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DCE2B51CB3C9C1001217D8 /* UITextViewTests.swift */; };
 		CC02C18A1CCA704E0025CC04 /* ActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC02C1881CCA704C0025CC04 /* ActionTests.swift */; };
@@ -223,6 +225,8 @@
 		C7932E851C4B420A00086F3C /* UITextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UITextFieldTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C7945F101CC192E800DC9E37 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C7945F121CC1DFB400DC9E37 /* UIViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIViewControllerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C7D37AFB1CCA9BD3006530CF /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		C7D37AFD1CCA9BFA006530CF /* UINavigationControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerTests.swift; sourceTree = "<group>"; };
 		C7DCE2B21CB3C872001217D8 /* UITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UITextView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C7DCE2B51CB3C9C1001217D8 /* UITextViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UITextViewTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CC02C1881CCA704C0025CC04 /* ActionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTests.swift; sourceTree = "<group>"; };
@@ -446,6 +450,7 @@
 				C7DCE2B21CB3C872001217D8 /* UITextView.swift */,
 				8289A2E41BD7F6DD0097FB60 /* UIView.swift */,
 				C7945F101CC192E800DC9E37 /* UIViewController.swift */,
+				C7D37AFB1CCA9BD3006530CF /* UINavigationController.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 				C7DCE2B51CB3C9C1001217D8 /* UITextViewTests.swift */,
 				8289A2E61BD7F7730097FB60 /* UIViewTests.swift */,
 				C7945F121CC1DFB400DC9E37 /* UIViewControllerTests.swift */,
+				C7D37AFD1CCA9BFA006530CF /* UINavigationControllerTests.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -839,6 +845,7 @@
 				D8E4A6201B7BBB1600EAD8A8 /* UIBarButtonItem.swift in Sources */,
 				D8F097451B17F3C8002E15BA /* NSObject.swift in Sources */,
 				C7945F111CC192E800DC9E37 /* UIViewController.swift in Sources */,
+				C7D37AFC1CCA9BD3006530CF /* UINavigationController.swift in Sources */,
 				D834572E1AFEE45B0070616A /* SignalProducer.swift in Sources */,
 				C7DCE2B41CB3C89A001217D8 /* UITextView.swift in Sources */,
 				8289A2E51BD7F6DD0097FB60 /* UIView.swift in Sources */,
@@ -859,6 +866,7 @@
 				7DCF5B361CC80E8E004AEE75 /* UICollectionReusableViewTests.swift in Sources */,
 				8289A2E81BD7F7900097FB60 /* UIViewTests.swift in Sources */,
 				D8F073161B863CE70047D546 /* UILabelTests.swift in Sources */,
+				C7D37AFE1CCA9BFA006530CF /* UINavigationControllerTests.swift in Sources */,
 				7D2AA99D1CB6F275008AB5C9 /* UISwitchTests.swift in Sources */,
 				C7932E871C4B42F500086F3C /* UITextFieldTests.swift in Sources */,
 				8295FD8A1B87352D007C9000 /* UIButtonTests.swift in Sources */,

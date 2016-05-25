@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4238D5961B4D5950008534C0 /* NSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238D5951B4D5950008534C0 /* NSTextField.swift */; };
+		5F2739701CF6375500C44108 /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F27396C1CF6373000C44108 /* UIGestureRecognizer.swift */; };
+		5F2739711CF6375E00C44108 /* UIGestureRecognizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F27396E1CF6374500C44108 /* UIGestureRecognizerTests.swift */; };
 		45CED46F1D27C1E300788BDC /* UIActivityIndicatorViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CED46D1D27C1D400788BDC /* UIActivityIndicatorViewTests.swift */; };
 		45CED4701D27C1E400788BDC /* UIActivityIndicatorViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CED46D1D27C1D400788BDC /* UIActivityIndicatorViewTests.swift */; };
 		45CED4711D27C1EB00788BDC /* UIActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CED46B1D27BB8700788BDC /* UIActivityIndicatorView.swift */; };
@@ -515,8 +517,8 @@
 				45CED46D1D27C1D400788BDC /* UIActivityIndicatorViewTests.swift */,
 				8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */,
 				8295FD881B873490007C9000 /* UIButtonTests.swift */,
-				8295FD851B873081007C9000 /* UIControlTests.swift */,
 				7DCF5B351CC80E8E004AEE75 /* UICollectionReusableViewTests.swift */,
+				8295FD851B873081007C9000 /* UIControlTests.swift */,
 				9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */,
 				5F27396E1CF6374500C44108 /* UIGestureRecognizerTests.swift */,
 				8289A2E01BD7EF1F0097FB60 /* UIImageViewTests.swift */,
@@ -528,8 +530,8 @@
 				7DC325791CC6FD0A00746D88 /* UITableViewHeaderFooterViewTests.swift */,
 				C7932E851C4B420A00086F3C /* UITextFieldTests.swift */,
 				C7DCE2B51CB3C9C1001217D8 /* UITextViewTests.swift */,
-				8289A2E61BD7F7730097FB60 /* UIViewTests.swift */,
 				C7945F121CC1DFB400DC9E37 /* UIViewControllerTests.swift */,
+				8289A2E61BD7F7730097FB60 /* UIViewTests.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";

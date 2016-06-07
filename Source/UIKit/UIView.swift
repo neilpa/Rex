@@ -21,7 +21,7 @@ extension UIView {
     }
     
         
-    /// Wraps a UITableViewCell's `userInteractionEnabled` value in a bindable property.
+    /// Wraps a view's `userInteractionEnabled` state in a bindable property.
     public var rex_userInteractionEnabled: MutableProperty<Bool> {
         return associatedProperty(self, key: &userInteractionEnabledKey, initial: { $0.userInteractionEnabled }, setter: { $0.userInteractionEnabled = $1 })
     }

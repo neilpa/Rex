@@ -12,11 +12,6 @@ import XCTest
 import enum Result.NoError
 
 extension UIButton {
-    static func button() -> UIButton {
-        let button = UIButton(type: UIButtonType.Custom)
-        return button;
-    }
-    
     override public func sendAction(action: Selector, to target: AnyObject?, forEvent event: UIEvent?) {
         target?.performSelector(action, withObject: nil)
     }
@@ -91,7 +86,6 @@ class UIButtonTests: XCTestCase {
         button.rex_pressed <~ SignalProducer(value: CocoaAction(action, input: ()))
         
         button.sendActionsForControlEvents(.TouchUpInside)
-        
         
         XCTAssertTrue(passed.value)
     }

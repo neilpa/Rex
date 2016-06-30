@@ -18,8 +18,8 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '2.0'
   s.tvos.deployment_target = '9.0'
 
-  s.source       = { :git => 'https://github.com/neilpa/Rex.git', :tag => s.version }
-  s.dependency 'ReactiveCocoa', '~> 4.1'
+  s.source       = { :git => 'https://github.com/neilpa/Rex.git', :commit => '265e8e9c9503bc917ee5af5252590ab38eda4bff' }
+  s.dependency 'ReactiveCocoa', '~> 4.2.1'
   s.ios.framework  = 'UIKit'
   s.tvos.framework = 'UIKit'
   s.osx.framework  = 'AppKit'

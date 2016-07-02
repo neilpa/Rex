@@ -24,6 +24,7 @@ class UITableViewCellTests: XCTestCase {
         label.rex_text <~
             titleProperty
                 .producer
+                .map(Optional.init) // TODO: Remove in the future, binding with optionals will be available soon in RAC
                 .takeUntil(cell.rex_prepareForReuse)
 
         XCTAssertEqual(label.text, "John")

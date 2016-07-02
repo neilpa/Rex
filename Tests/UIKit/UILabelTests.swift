@@ -36,7 +36,7 @@ class UILabelTests: XCTestCase {
         label.text = ""
         
         let (pipeSignal, observer) = Signal<String, NoError>.pipe()
-        label.rex_text <~ SignalProducer(signal: pipeSignal)
+        label.rex_text <~ SignalProducer(signal: pipeSignal).producer.map(Optional.init) // TODO: Remove in the future, binding with optionals will be available soon in RAC
         
         observer.sendNext(firstChange)
         XCTAssertEqual(label.text, firstChange)

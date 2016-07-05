@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = 'Rex'
   s.module_name  = 'Rex'
-  s.version      = '0.11.0'
+  s.version      = '0.11.0-beta.1'
   s.summary      = 'ReactiveCocoa Extensions'
 
   s.description  = <<-DESC
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '2.0'
   s.tvos.deployment_target = '9.0'
 
-  s.source       = { :git => 'https://github.com/neilpa/Rex.git', :commit => '265e8e9c9503bc917ee5af5252590ab38eda4bff' }
+  s.source       = { :git => 'https://github.com/neilpa/Rex.git', :tag => '0.11.0-beta.1' }
   s.dependency 'ReactiveCocoa', '~> 4.2.1'
   s.ios.framework  = 'UIKit'
   s.tvos.framework = 'UIKit'

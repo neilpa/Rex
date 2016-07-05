@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                    Extensions for ReactiveCocoa that may not fit in the core framework.
                    DESC
 
-  s.homepage     = 'https://github.com/neilpa/Rex'
+  s.homepage     = 'https://github.com/RACCommunity/Rex'
   s.license      = 'MIT'
 
   s.author             = { 'Neil Pankey' => 'npankey@gmail.com' }
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '2.0'
   s.tvos.deployment_target = '9.0'
 
-  s.source       = { :git => 'https://github.com/neilpa/Rex.git', :tag => s.version }
+  s.source       = { :git => 'https://github.com/RACCommunity/Rex.git', :tag => s.version }
   s.dependency 'ReactiveCocoa', '~> 4.2.1'
   s.ios.framework  = 'UIKit'
   s.tvos.framework = 'UIKit'

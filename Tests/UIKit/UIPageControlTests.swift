@@ -37,11 +37,12 @@ class UIPageControlTests: XCTestCase {
         _pageControl = pageControl
 
         let (pipeSignal, observer) = Signal<Int, NoError>.pipe()
+        pageControl.numberOfPages = 2
         pageControl.rex_currentPage <~ SignalProducer(signal: pipeSignal)
 
+        observer.sendNext(0)
+        XCTAssertTrue(pageControl.currentPage == 0)
         observer.sendNext(1)
         XCTAssertTrue(pageControl.currentPage == 1)
-        observer.sendNext(2)
-        XCTAssertTrue(pageControl.currentPage == 2)
     }
 }

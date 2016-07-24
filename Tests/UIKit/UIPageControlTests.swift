@@ -32,7 +32,7 @@ class UIPageControlTests: XCTestCase {
         XCTAssertTrue(pageControl.numberOfPages == 2)
     }
 
-    func testNumberOfPages() {
+    func testCurrentPage() {
         let pageControl = UIPageControl(frame: CGRectZero)
         _pageControl = pageControl
 

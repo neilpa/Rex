@@ -11,12 +11,12 @@ import UIKit
 
 extension UIPageControl {
 
-    /// Wraps a label's `numberOfPages` value in a bindable property.
+    /// Wraps a page control's `numberOfPages` value in a bindable property.
     public var rex_numberOfPages: MutableProperty<Int> {
         return associatedProperty(self, key: &numberOfPagesKey, initial: { $0.numberOfPages }, setter: { $0.numberOfPages = $1 })
     }
 
-    /// Wraps a label's `currentPage` value in a bindable property.
+    /// Wraps a page control's `currentPage` value in a bindable property.
     public var rex_currentPage: MutableProperty<Int> {
         return associatedProperty(self, key: &currentPageKey, initial: { $0.currentPage }, setter: { $0.currentPage = $1 })
     }

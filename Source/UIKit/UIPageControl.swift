@@ -18,9 +18,8 @@ extension UIPageControl {
 
     /// Wraps a page control's `currentPage` value in a bindable property.
     public var rex_currentPage: MutableProperty<Int> {
-        return associatedProperty(self, key: &currentPageKey, initial: { $0.currentPage }, setter: { $0.currentPage = $1 })
+        return UIControl.rex_value(self, getter: { $0.currentPage }, setter: { $0.currentPage = $1 })
     }
 }
 
 private var numberOfPagesKey: UInt8 = 0
-private var currentPageKey: UInt8 = 0

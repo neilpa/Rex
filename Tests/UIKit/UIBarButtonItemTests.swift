@@ -36,7 +36,7 @@ class UIBarButtonItemTests: XCTestCase {
         barButtonItem.isEnabled = true
         
         let (pipeSignal, observer) = Signal<Bool, NoError>.pipe()
-        barButtonItem.rex_enabled <~ SignalProducer(signal: pipeSignal)
+        barButtonItem.rex_isEnabled <~ SignalProducer(signal: pipeSignal)
         
         
         observer.sendNext(false)

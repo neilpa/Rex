@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReactiveSwift
 import ReactiveCocoa
 import Result
 
@@ -18,7 +19,7 @@ extension NSViewController {
         return associatedObject(self, key: &viewWillDisappearKey) {
             var returnedSignal: Signal<Void, NoError>!
             
-            $0.rac_signalForSelector(#selector(NSViewController.viewWillDisappear))
+            $0.rac_signal(for: #selector(NSViewController.viewWillDisappear))
                 .toSignalProducer()
                 .map { _ in () }
                 .flatMapError { error in

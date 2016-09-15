@@ -7,17 +7,17 @@
 //
 
 import Foundation
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 /// A `PropertyBinding` matches up a property with a function that validates incoming values to the property, and wraps the two into a new `MutablePropertyType` that can be treated as its own property, and bound to.
-public final class PropertyBinding<Property: MutablePropertyType> {
+public final class PropertyBinding<Property: MutablePropertyProtocol> {
 
     /// Validators are expected to return either `nil` if the input value is invalid, the passed-in value, or a corrected version of the passed-in value. The behavior is completely up to the implementor.
-    public typealias Validator = Property.Value -> Property.Value?
+    public typealias Validator = (Property.Value) -> Property.Value?
     
-    private let _property: Property
-    private let _validator: Validator?
+    fileprivate let _property: Property
+    fileprivate let _validator: Validator?
     
     public init(property: Property, validator: Validator?) {
         _property = property
@@ -25,7 +25,13 @@ public final class PropertyBinding<Property: MutablePropertyType> {
     }
 }
 
-extension PropertyBinding : MutablePropertyType {
+extension PropertyBinding : MutablePropertyProtocol {
+    /// The lifetime of `self`. The binding operators use this to determine when
+    /// the binding should be teared down.
+    public var lifetime: Lifetime {
+        return _property.lifetime
+    }
+
     public var producer: SignalProducer<Property.Value, NoError> {
         return _property.producer
     }
@@ -41,11 +47,11 @@ extension PropertyBinding : MutablePropertyType {
 }
 
 public extension TypedDynamicProperty {
-    public typealias Validator = Value -> Value?
+    public typealias Validator = (Value) -> Value?
     public typealias Binding = PropertyBinding<TypedDynamicProperty<Value>>
 
     /// Returns a binding for the specified `object` and `keyPath`, with an optional `validator` that returns a valid, replacement value, or nil if the value is invalid.
-    public class func bindingForObject(object: NSObject, withKeyPath keyPath: String, validator: Validator?) -> Binding {
+    public class func bindingForObject(_ object: NSObject, withKeyPath keyPath: String, validator: Validator?) -> Binding {
         return PropertyBinding(property: TypedDynamicProperty<Value>(object: object, keyPath: keyPath), validator: validator)
     }
     
@@ -68,7 +74,7 @@ public extension TypedDynamicProperty {
     ///   }
     /// }
     /// ```
-    public func bindingWithValidator(validator: Validator?) -> Binding {
+    public func bindingWithValidator(_ validator: Validator?) -> Binding {
         return PropertyBinding(property: self, validator: validator)
     }
 }

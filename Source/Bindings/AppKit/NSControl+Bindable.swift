@@ -14,11 +14,11 @@ extension NSControl {
         return associatedObject(self, key: &enabledBindingKey) { control in
             ConsumerBinding() { value in
                 switch value {
-                case let .Value(v):
-                    control.enabled = v
+                case let .value(v):
+                    control.isEnabled = v
                 default:
                     // If the enabled states are mixed, then we assume it's false
-                    control.enabled = false
+                    control.isEnabled = false
                 }
             }
         }

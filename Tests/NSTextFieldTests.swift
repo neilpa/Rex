@@ -7,6 +7,7 @@
 //
 
 @testable import Rex
+import ReactiveSwift
 import ReactiveCocoa
 import Foundation
 import XCTest
@@ -20,10 +21,10 @@ final class NSTextFieldTests : XCTestCase {
     }
 
     func testTextColorPropertyDoesntCreateRetainCycle() {
-        let label = NSTextField(frame: CGRectZero)
+        let label = NSTextField(frame: .zero)
         _textField = label
         
-        label.rex_textColor <~ SignalProducer(value: NSColor.greenColor())
-        XCTAssert(_textField?.textColor == NSColor.greenColor())
+        label.rex_textColor <~ SignalProducer(value: NSColor.green)
+        XCTAssert(_textField?.textColor == NSColor.green)
     }
 }

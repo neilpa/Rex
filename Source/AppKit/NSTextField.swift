@@ -6,17 +6,18 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
-import Foundation
-import AppKit
+import ReactiveSwift
 import ReactiveCocoa
+import AppKit
+import enum Result.NoError
 import Result
 
 extension NSTextField {
     /// Sends the text field's string value as it changes. Equivalent to the "continuous"
     /// control setting in IB
     public var rex_continuousStringValues: SignalProducer<String, NoError> {
-        return NSNotificationCenter.defaultCenter()
-            .rac_notifications(NSControlTextDidChangeNotification, object: self)
+        return NotificationCenter.default
+            .rac_notifications(forName: NSNotification.Name.NSControlTextDidChange, object: self)
             .map { notification in
                 (notification.object as! NSTextField).stringValue
         }
@@ -25,8 +26,8 @@ extension NSTextField {
     /// Sends the text field's string value when editing completes. For instance, when the
     /// user tabs out of the control, or hits the return key.
     public var rex_stringValues: SignalProducer<String, NoError> {
-        return NSNotificationCenter.defaultCenter()
-            .rac_notifications(NSControlTextDidEndEditingNotification, object: self)
+        return NotificationCenter.default
+            .rac_notifications(forName: NSNotification.Name.NSControlTextDidEndEditing, object: self)
             .map { notification in
                 (notification.object as! NSTextField).stringValue
         }

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
-import Foundation
+import ReactiveSwift
 import ReactiveCocoa
 
 /// Attaches a `MutableProperty` value to the `host` object using KVC to get the initial
@@ -16,12 +16,12 @@ import ReactiveCocoa
 ///
 /// This can be used as an alternative to `DynamicProperty` for creating strongly typed
 /// bindings on Cocoa objects.
-public func associatedProperty(host: AnyObject, keyPath: StaticString) -> MutableProperty<String> {
-    let initial: AnyObject -> String  = { host in
-        host.valueForKeyPath(keyPath.stringValue) as? String ?? ""
+public func associatedProperty(_ host: AnyObject, keyPath: StaticString) -> MutableProperty<String> {
+    let initial: (AnyObject) -> String  = { host in
+        host.value(forKeyPath: String(describing: keyPath)) as? String ?? ""
     }
     let setter: (AnyObject, String) -> () = { host, newValue in
-        host.setValue(newValue, forKeyPath: keyPath.stringValue)
+        host.setValue(newValue, forKeyPath: String(describing: keyPath))
     }
     return associatedProperty(host, key: keyPath.utf8Start, initial: initial, setter: setter)
 }
@@ -33,12 +33,12 @@ public func associatedProperty(host: AnyObject, keyPath: StaticString) -> Mutabl
 ///
 /// This can be used as an alternative to `DynamicProperty` for creating strongly typed
 /// bindings on Cocoa objects.
-public func associatedProperty<T: AnyObject>(host: AnyObject, keyPath: StaticString, @noescape placeholder: () -> T) -> MutableProperty<T> {
+public func associatedProperty<T: AnyObject>(_ host: AnyObject, keyPath: StaticString, placeholder: () -> T) -> MutableProperty<T> {
     let setter: (AnyObject, T) -> () = { host, newValue in
-        host.setValue(newValue, forKeyPath: keyPath.stringValue)
+        host.setValue(newValue, forKeyPath: String(describing: keyPath))
     }
     return associatedProperty(host, key: keyPath.utf8Start, initial: { host in
-        host.valueForKeyPath(keyPath.stringValue) as? T ?? placeholder()
+        host.value(forKeyPath: String(describing: keyPath)) as? T ?? placeholder()
     }, setter: setter)
 }
 
@@ -48,9 +48,11 @@ public func associatedProperty<T: AnyObject>(host: AnyObject, keyPath: StaticStr
 ///
 /// This can be used as an alternative to `DynamicProperty` for creating strongly typed
 /// bindings on Cocoa objects.
-public func associatedProperty<Host: AnyObject, T>(host: Host, key: UnsafePointer<()>, @noescape initial: Host -> T, setter: (Host, T) -> ()) -> MutableProperty<T> {
+public func associatedProperty<Host: AnyObject, T>(_ host: Host, key: UnsafeRawPointer, initial: (Host) -> T, setter: @escaping (Host, T) -> (), setUp: (MutableProperty<T>) -> () = { _ in }) -> MutableProperty<T> {
     return associatedObject(host, key: key) { host in
         let property = MutableProperty(initial(host))
+
+        setUp(property)
 
         property.producer.startWithNext { [weak host] next in
             if let host = host {
@@ -65,7 +67,7 @@ public func associatedProperty<Host: AnyObject, T>(host: Host, key: UnsafePointe
 /// On first use attaches the object returned from `initial` to the `host` object using
 /// `key` via `objc_setAssociatedObject`. On subsequent usage, returns said object via
 /// `objc_getAssociatedObject`.
-public func associatedObject<Host: AnyObject, T: AnyObject>(host: Host, key: UnsafePointer<()>, @noescape initial: Host -> T) -> T {
+public func associatedObject<Host: AnyObject, T: AnyObject>(_ host: Host, key: UnsafeRawPointer, initial: (Host) -> T) -> T {
     var value = objc_getAssociatedObject(host, key) as? T
     if value == nil {
         value = initial(host)

@@ -7,20 +7,35 @@
 //
 
 import Rex
+import ReactiveSwift
 import ReactiveCocoa
 import XCTest
 
 final class NSObjectTests: XCTestCase {
-
+    
     func testProducerForKeyPath() {
         let object = Object()
         var value: String = ""
 
-        object.rex_producerForKeyPath("string").start(Observer(next: { value = $0 }))
+        object.rex_producer(forKeyPath: "string").startWithNext { value = $0 }
         XCTAssertEqual(value, "foo")
 
         object.string = "bar"
         XCTAssertEqual(value, "bar")
+    }
+    
+    func testObjectsWillBeDeallocatedSignal() {
+        
+        let expectation = self.expectation(description: "Expected timer to send `completed` event when object deallocates")
+        defer { self.waitForExpectations(timeout: 2, handler: nil) }
+        
+        let object = Object()
+
+        timer(interval: 1, on: QueueScheduler(name: "test.queue"))
+            .take(until: object.rex_willDealloc)
+            .startWithCompleted {
+                expectation.fulfill()
+        }
     }
 }
 
@@ -45,11 +60,10 @@ final class NSObjectDeallocTests: XCTestCase {
         let object = Object()
         _object = object
 
-        associatedProperty(object, keyPath: "string", placeholder: { _ in "" }) <~ SignalProducer(value: "Test")
+        associatedProperty(object, keyPath: "string", placeholder: { _ in "" as NSString }) <~ SignalProducer(value: "Test")
         XCTAssert(_object?.string == "Test")
     }
 }
-
 
 class Object: NSObject {
     dynamic var string = "foo"

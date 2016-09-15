@@ -8,12 +8,13 @@
 
 import Foundation
 import AppKit
+import ReactiveSwift
 import ReactiveCocoa
 import Result
 
 extension NSPopUpButton {
     public var rex_indexOfSelectedItem: MutableProperty<Int> {
-        return associatedProperty(self, key: &indexOfSelectedItemKey, initial: { $0.indexOfSelectedItem }, setter: { $0.selectItemAtIndex($1) } )
+        return associatedProperty(self, key: &indexOfSelectedItemKey, initial: { $0.indexOfSelectedItem }, setter: { $0.selectItem(at: $1) } )
     }
     
     public var rex_title: MutableProperty<String> {

@@ -14,7 +14,7 @@ extension NSTextField {
         return associatedObject(self, key: &stringValueBindingKey) { textField in
             ConsumerBinding() { value in
                 switch value {
-                case let .Value(v):
+                case let .value(v):
                     textField.stringValue = v
                 default:
                     // The placeholderString is only shown if the string value is cleared on the control

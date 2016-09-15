@@ -7,6 +7,7 @@
 //
 
 @testable import Rex
+import ReactiveSwift
 import ReactiveCocoa
 import Foundation
 import XCTest
@@ -20,15 +21,15 @@ final class NSControlTests : XCTestCase {
     }
     
     func testEnabledPropertyDoesntCreateRetainCycle() {
-        let control = NSControl(frame: CGRectZero)
+        let control = NSControl(frame: .zero)
         _control = control
         
         control.rex_enabled <~ SignalProducer(value: false)
-        XCTAssert(_control?.enabled == false)
+        XCTAssert(_control?.isEnabled == false)
     }
     
     func testAlphaValuePropertyDoesntCreateRetainCycle() {
-        let control = NSControl(frame: CGRectZero)
+        let control = NSControl(frame: .zero)
         _control = control
         
         control.rex_alphaValue <~ SignalProducer(value: 0.0)

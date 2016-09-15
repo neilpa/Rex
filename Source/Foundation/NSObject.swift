@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
-import Foundation
+import ReactiveSwift
 import ReactiveCocoa
-import Result
+import enum Result.NoError
 
 extension NSObject {
     /// Creates a strongly-typed producer to monitor `keyPath` via KVO. The caller
@@ -16,8 +16,8 @@ extension NSObject {
     ///
     /// Swift classes deriving `NSObject` must declare properties as `dynamic` for
     /// them to work with KVO. However, this is not recommended practice.
-    public func rex_producerForKeyPath<T>(keyPath: String) -> SignalProducer<T, NoError> {
-        return self.rac_valuesForKeyPath(keyPath, observer: nil)
+    public func rex_producer<T>(forKeyPath keyPath: String) -> SignalProducer<T, NoError> {
+        return self.rac_values(forKeyPath: keyPath, observer: nil)
             .toSignalProducer()
             .map { $0 as! T }
             .flatMapError { error in
@@ -25,5 +25,13 @@ extension NSObject {
                 assertionFailure("Unexpected error from KVO signal: \(error)")
                 return .empty
             }
+    }
+    
+    /// Creates a signal that will be triggered when the object
+    /// is deallocated.
+    public var rex_willDealloc: Signal<(), NoError> {
+        return self
+            .rac_willDeallocSignal()
+            .rex_toTriggerSignal()
     }
 }

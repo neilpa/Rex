@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import ReactiveSwift
 import ReactiveCocoa
 import Result
 
@@ -30,7 +31,7 @@ extension NSControl {
             }
             
             if let strongSelf = self {
-                strongSelf.rex_enabled <~ property.producer.flatMap(.Latest) { $0.rex_enabledProducer }
+                strongSelf.rex_enabled <~ property.producer.flatMap(.latest) { $0.rex_enabledProducer }
             }
             
             return property
@@ -39,7 +40,7 @@ extension NSControl {
 
     /// Wraps a control's `enabled` state in a bindable property.
     public var rex_enabled: MutableProperty<Bool> {
-        return associatedProperty(self, key: &enabledKey, initial: { $0.enabled }, setter: { $0.enabled = $1 })
+        return associatedProperty(self, key: &enabledKey, initial: { $0.isEnabled }, setter: { $0.isEnabled = $1 })
     }
     
     /// Wraps a control's alpha value in a bindable property.

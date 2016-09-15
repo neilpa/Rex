@@ -14,7 +14,7 @@ extension NSButton {
         return associatedObject(self, key: &stateBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {
-                case let .Value(v):
+                case let .value(v):
                     button.state = v
                 default:
                     button.state = NSMixedState

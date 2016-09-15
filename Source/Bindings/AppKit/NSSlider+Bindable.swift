@@ -13,7 +13,7 @@ extension NSSlider {
     public var rex_doubleValueBinding : ConsumerBinding<Double> {
         return associatedObject(self, key: &doubleValueBindingKey) { slider in
             ConsumerBinding() { value in
-                if case let .Value(v) = value {
+                if case let .value(v) = value {
                     slider.doubleValue = v
                 }
             }

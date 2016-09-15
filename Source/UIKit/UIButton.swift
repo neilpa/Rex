@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
+import ReactiveSwift
 import ReactiveCocoa
 import UIKit
 
@@ -15,28 +16,27 @@ extension UIButton {
     /// previous action is removed as a target. This also binds the enabled state of the
     /// action to the `rex_enabled` property on the button.
     public var rex_pressed: MutableProperty<CocoaAction> {
-        return associatedObject(self, key: &pressedKey, initial: { [weak self] _ in
+        return associatedObject(self, key: &pressedKey) { host in
             let initial = CocoaAction.rex_disabled
             let property = MutableProperty(initial)
 
             property.producer
                 .combinePrevious(initial)
-                .start(Observer(next: { previous, next in
-                    self?.removeTarget(previous, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
-                    self?.addTarget(next, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
-                }))
+                .startWithNext { [weak host] previous, next in
+                    host?.removeTarget(previous, action: CocoaAction.selector, for: .touchUpInside)
+                    host?.addTarget(next, action: CocoaAction.selector, for: .touchUpInside)
+                }
 
-            if let strongSelf = self {
-                strongSelf.rex_enabled <~ property.producer.flatMap(.Latest) { $0.rex_enabledProducer }
-            }
+            host.rex_enabled <~ property.producer.flatMap(.latest) { $0.rex_enabledProducer }
+
             return property
-        })
+        }
     }
 
     /// Wraps a button's `title` text in a bindable property. Note that this only applies
     /// to `UIControlState.Normal`.
     public var rex_title: MutableProperty<String> {
-        return associatedProperty(self, key: &titleKey, initial: { $0.titleForState(.Normal) ?? "" }, setter: { $0.setTitle($1, forState: .Normal) })
+        return associatedProperty(self, key: &titleKey, initial: { $0.title(for: .normal) ?? "" }, setter: { $0.setTitle($1, for: .normal) })
     }
 }
 

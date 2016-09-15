@@ -15,7 +15,7 @@ extension NSPopUpButton {
         return associatedObject(self, key: &menuItemsBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {
-                case let .Value(v):
+                case let .value(v):
                     button.removeAllItems()
                     v.forEach { button.menu?.addItem($0) }
                 default:
@@ -29,8 +29,8 @@ extension NSPopUpButton {
         return associatedObject(self, key: &selectedIndexBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {
-                case let .Value(v):
-                    button.selectItemAtIndex(v)
+                case let .value(v):
+                    button.selectItem(at: v)
                     (button.cell as? NSPopUpButtonCell)?.menuItem = button.itemArray[v]
                     button.synchronizeTitleAndSelectedItem()
                 default:
@@ -44,8 +44,8 @@ extension NSPopUpButton {
         return associatedObject(self, key: &selectedTagBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {
-                case let .Value(v):
-                    button.selectItemWithTag(v)
+                case let .value(v):
+                    button.selectItem(withTag: v)
                 default:
                     button.displayPlaceholder(value)
                 }
@@ -57,7 +57,7 @@ extension NSPopUpButton {
         return associatedObject(self, key: &menuItemBindingKey) { button in
             ConsumerBinding() { value in
                 switch value {
-                case let .Value(v):
+                case let .value(v):
                     (button.cell as? NSPopUpButtonCell)?.menuItem = v
                 default:
                     button.displayPlaceholder(value)
@@ -71,22 +71,21 @@ extension NSPopUpButton {
     /// Displays the placeholder text for the provided value. 
     ///
     /// - precondition: `placeholder` must specify a placeholder `BindingValue`
-    private func displayPlaceholder<T>(placeholder: BindingValue<T>) {
+    fileprivate func displayPlaceholder<T>(_ placeholder: BindingValue<T>) {
         precondition(placeholder.isPlaceholder, "displayPlaceholder must be called with a placeholder value.")
-        
-        let controlSize = self.cell?.controlSize ?? .RegularControlSize
-        let font = NSFont.systemFontOfSize(NSFont.systemFontSizeForControlSize(controlSize))
+
+        let font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: self.controlSize))
         
         let placeholder = placeholder.formatString({ _ in return "" })
         
         let disabledColor: NSColor
         if #available(OSX 10.10, *) {
-            disabledColor = NSColor.tertiaryLabelColor()
+            disabledColor = NSColor.tertiaryLabelColor
         } else {
-            disabledColor = NSColor.blackColor().colorWithAlphaComponent(0.5)
+            disabledColor = NSColor.black.withAlphaComponent(0.5)
         }
         
-        let attrs = [NSForegroundColorAttributeName : disabledColor, NSFontAttributeName : font]
+        let attrs: [String : Any] = [NSForegroundColorAttributeName : disabledColor, NSFontAttributeName : font]
         
         let menuItem = NSMenuItem(title: "", action: nil, keyEquivalent: "")
         menuItem.attributedTitle = NSAttributedString(string: placeholder, attributes: attrs)

@@ -6,9 +6,11 @@
 //  Copyright © 2015 Neil Pankey. All rights reserved.
 //
 
+import ReactiveSwift
 import ReactiveCocoa
 import UIKit
 import XCTest
+import enum Result.NoError
 
 class UIViewTests: XCTestCase {
     
@@ -20,7 +22,7 @@ class UIViewTests: XCTestCase {
     }
     
     func testAlphaPropertyDoesntCreateRetainCycle() {
-        let view = UIView(frame: CGRectZero)
+        let view = UIView(frame: CGRect.zero)
         _view = view
         
         view.rex_alpha <~ SignalProducer(value: 0.5)
@@ -28,28 +30,28 @@ class UIViewTests: XCTestCase {
     }
     
     func testHiddenPropertyDoesntCreateRetainCycle() {
-        let view = UIView(frame: CGRectZero)
+        let view = UIView(frame: CGRect.zero)
         _view = view
         
         view.rex_hidden <~ SignalProducer(value: true)
-        XCTAssert(_view?.hidden == true)
+        XCTAssert(_view?.isHidden == true)
     }
     
     func testHiddenProperty() {
-        let view = UIView(frame: CGRectZero)
-        view.hidden = true
+        let view = UIView(frame: CGRect.zero)
+        view.isHidden = true
         
         let (pipeSignal, observer) = Signal<Bool, NoError>.pipe()
         view.rex_hidden <~ SignalProducer(signal: pipeSignal)
         
         observer.sendNext(true)
-        XCTAssertTrue(view.hidden)
+        XCTAssertTrue(view.isHidden)
         observer.sendNext(false)
-        XCTAssertFalse(view.hidden)
+        XCTAssertFalse(view.isHidden)
     }
     
     func testAlphaProperty() {
-        let view = UIView(frame: CGRectZero)
+        let view = UIView(frame: CGRect.zero)
         view.alpha = 0.0
         
         let firstChange = CGFloat(0.5)
@@ -62,5 +64,18 @@ class UIViewTests: XCTestCase {
         XCTAssertEqualWithAccuracy(view.alpha, firstChange, accuracy: 0.01)
         observer.sendNext(secondChange)
         XCTAssertEqualWithAccuracy(view.alpha, secondChange, accuracy: 0.01)
+    }
+    
+    func testUserInteractionEnabledProperty() {
+        let view = UIView(frame: CGRect.zero)
+        view.isUserInteractionEnabled = true
+        
+        let (pipeSignal, observer) = Signal<Bool, NoError>.pipe()
+        view.rex_userInteractionEnabled <~ SignalProducer(signal: pipeSignal)
+        
+        observer.sendNext(true)
+        XCTAssertTrue(view.isUserInteractionEnabled)
+        observer.sendNext(false)
+        XCTAssertFalse(view.isUserInteractionEnabled)
     }
 }

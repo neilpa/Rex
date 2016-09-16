@@ -50,6 +50,11 @@ public final class ValidatingBinding<Target: BindingTarget, ValidationError: Err
 
 public extension NSObject {
     /// Creates a binding for the given keyPath and supplied validator function
+    public func rex_binding<Value, ValidationError>(forKeyPath keyPath: String, validator: ValidatingBinding<DynamicProperty<Value>, ValidationError>.Validator?) -> ValidatingBinding<DynamicProperty<Value>, ValidationError> where Value: _ObjectiveCBridgeable, ValidationError: Error {
+        return ValidatingBinding(target: DynamicProperty<Value>(object: self, keyPath: keyPath), validator: validator)
+    }
+
+    /// Creates a binding for the given keyPath and supplied validator function
     public func rex_binding<Value, ValidationError>(forKeyPath keyPath: String, validator: ValidatingBinding<DynamicProperty<Value>, ValidationError>.Validator?) -> ValidatingBinding<DynamicProperty<Value>, ValidationError> where Value: AnyObject, ValidationError: Error {
         return ValidatingBinding(target: DynamicProperty<Value>(object: self, keyPath: keyPath), validator: validator)
     }

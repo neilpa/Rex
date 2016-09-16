@@ -59,10 +59,6 @@
 		83B8FB3D1C60F7100075D9AF /* PropertyBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB2E1C60F7100075D9AF /* PropertyBinding.swift */; };
 		83B8FB3E1C60F7100075D9AF /* PropertyBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB2E1C60F7100075D9AF /* PropertyBinding.swift */; };
 		83B8FB3F1C60F7100075D9AF /* PropertyBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB2E1C60F7100075D9AF /* PropertyBinding.swift */; };
-		83B8FB401C60F7100075D9AF /* TypedDynamicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB2F1C60F7100075D9AF /* TypedDynamicProperty.swift */; };
-		83B8FB411C60F7100075D9AF /* TypedDynamicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB2F1C60F7100075D9AF /* TypedDynamicProperty.swift */; };
-		83B8FB421C60F7100075D9AF /* TypedDynamicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB2F1C60F7100075D9AF /* TypedDynamicProperty.swift */; };
-		83B8FB431C60F7100075D9AF /* TypedDynamicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB2F1C60F7100075D9AF /* TypedDynamicProperty.swift */; };
 		83B8FB491C60F7220075D9AF /* NSButton+Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB441C60F7220075D9AF /* NSButton+Bindable.swift */; };
 		83B8FB4A1C60F7220075D9AF /* NSControl+Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB451C60F7220075D9AF /* NSControl+Bindable.swift */; };
 		83B8FB4B1C60F7220075D9AF /* NSPopUpButton+Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8FB461C60F7220075D9AF /* NSPopUpButton+Bindable.swift */; };
@@ -291,7 +287,6 @@
 		83B8FB2C1C60F7100075D9AF /* BindingValueConsumer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BindingValueConsumer.swift; path = Bindings/BindingValueConsumer.swift; sourceTree = "<group>"; };
 		83B8FB2D1C60F7100075D9AF /* ConsumerBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsumerBinding.swift; path = Bindings/ConsumerBinding.swift; sourceTree = "<group>"; };
 		83B8FB2E1C60F7100075D9AF /* PropertyBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyBinding.swift; path = Bindings/PropertyBinding.swift; sourceTree = "<group>"; };
-		83B8FB2F1C60F7100075D9AF /* TypedDynamicProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypedDynamicProperty.swift; path = Bindings/TypedDynamicProperty.swift; sourceTree = "<group>"; };
 		83B8FB441C60F7220075D9AF /* NSButton+Bindable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSButton+Bindable.swift"; path = "Bindings/AppKit/NSButton+Bindable.swift"; sourceTree = "<group>"; };
 		83B8FB451C60F7220075D9AF /* NSControl+Bindable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSControl+Bindable.swift"; path = "Bindings/AppKit/NSControl+Bindable.swift"; sourceTree = "<group>"; };
 		83B8FB461C60F7220075D9AF /* NSPopUpButton+Bindable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSPopUpButton+Bindable.swift"; path = "Bindings/AppKit/NSPopUpButton+Bindable.swift"; sourceTree = "<group>"; };
@@ -464,7 +459,6 @@
 				83B8FB2C1C60F7100075D9AF /* BindingValueConsumer.swift */,
 				83B8FB2D1C60F7100075D9AF /* ConsumerBinding.swift */,
 				83B8FB2E1C60F7100075D9AF /* PropertyBinding.swift */,
-				83B8FB2F1C60F7100075D9AF /* TypedDynamicProperty.swift */,
 				83B8FB111C60F4C10075D9AF /* AppKit */,
 			);
 			name = Bindings;
@@ -969,7 +963,6 @@
 				9A5492121D33387D009A8D44 /* Deprecations+Removals.swift in Sources */,
 				D86FFBD11B34AD6F001A89B3 /* Association.swift in Sources */,
 				D8003EB91AFEC7A900D7D3C5 /* SignalProducer.swift in Sources */,
-				83B8FB401C60F7100075D9AF /* TypedDynamicProperty.swift in Sources */,
 				833859951C3E9B8B00EE372F /* NSControl.swift in Sources */,
 				83B8FB341C60F7100075D9AF /* BindingValueConsumer.swift in Sources */,
 				83B8FB491C60F7220075D9AF /* NSButton+Bindable.swift in Sources */,
@@ -1037,7 +1030,6 @@
 				8289A2E51BD7F6DD0097FB60 /* UIView.swift in Sources */,
 				83B8FB3D1C60F7100075D9AF /* PropertyBinding.swift in Sources */,
 				D86FFBD61B34B116001A89B3 /* UIControl.swift in Sources */,
-				83B8FB411C60F7100075D9AF /* TypedDynamicProperty.swift in Sources */,
 				D8F0973F1B17F31E002E15BA /* Data.swift in Sources */,
 				D86FFBDD1B34B691001A89B3 /* UIButton.swift in Sources */,
 				9A5492131D33387D009A8D44 /* Deprecations+Removals.swift in Sources */,
@@ -1090,7 +1082,6 @@
 				C72CF3E81CBF188A00E19897 /* RACSignal.swift in Sources */,
 				9A5492151D33387D009A8D44 /* Deprecations+Removals.swift in Sources */,
 				83B8FB3F1C60F7100075D9AF /* PropertyBinding.swift in Sources */,
-				83B8FB431C60F7100075D9AF /* TypedDynamicProperty.swift in Sources */,
 				D8715D9D1C210FF9005F4191 /* Action.swift in Sources */,
 				D8715DA61C21107F005F4191 /* UserDefaults.swift in Sources */,
 			);
@@ -1125,7 +1116,6 @@
 				D8715DBA1C2112D1005F4191 /* Action.swift in Sources */,
 				83B8FB3E1C60F7100075D9AF /* PropertyBinding.swift in Sources */,
 				D8715DC81C211553005F4191 /* UIButton.swift in Sources */,
-				83B8FB421C60F7100075D9AF /* TypedDynamicProperty.swift in Sources */,
 				D8715DC71C211553005F4191 /* UIBarItem.swift in Sources */,
 				D8715DC11C2112D6005F4191 /* UserDefaults.swift in Sources */,
 				45CED4721D27C1EC00788BDC /* UIActivityIndicatorView.swift in Sources */,

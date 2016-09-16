@@ -11,8 +11,8 @@ import ReactiveSwift
 import ReactiveCocoa
 import Result
 
-/// A `PropertyBinding` matches up a property with a function that validates incoming values to the property, and wraps the two into a new `MutablePropertyType` that can be treated as its own property, and bound to.
-public final class ValidatingBinding<Target: BindingTarget, ValidationError: Error>: BindingTarget {
+/// A `PropertyBinding` matches up a property with a function that validates incoming values to the property, and wraps the two into a new type that can be bound to, and expose values from the underlying property.
+public final class ValidatingBinding<Target: BindingTarget, ValidationError: Error>: BindingTarget where Target: PropertyProtocol {
     /// Validators are expected to return either `nil` if the input value is invalid, the passed-in value, or a corrected version of the passed-in value. The behavior is completely up to the implementor.
     public typealias Validator = (Target.Value) -> Result<Target.Value, ValidationError>
     
@@ -48,6 +48,29 @@ public final class ValidatingBinding<Target: BindingTarget, ValidationError: Err
     }
 }
 
+extension ValidatingBinding: PropertyProtocol {
+    /// A signal that will send the property's changes over time. It
+    /// completes when the property has deinitialized, or has no further
+    /// change.
+    public var signal: Signal<Target.Value, NoError> {
+        return _target.signal
+    }
+
+    /// The values producer of the property.
+    ///
+    /// It produces a signal that sends the property's current value,
+    /// followed by all changes over time. It completes when the property
+    /// has deinitialized, or has no further change.
+    public var producer: SignalProducer<Target.Value, NoError> {
+        return _target.producer
+    }
+
+    /// The current value of the property.
+    public var value: Target.Value {
+        return _target.value
+    }
+}
+
 public extension NSObject {
     /// Creates a binding for the given keyPath and supplied validator function
     public func rex_binding<Value, ValidationError>(forKeyPath keyPath: String, validator: ValidatingBinding<DynamicProperty<Value>, ValidationError>.Validator?) -> ValidatingBinding<DynamicProperty<Value>, ValidationError> where Value: _ObjectiveCBridgeable, ValidationError: Error {
@@ -60,23 +83,24 @@ public extension NSObject {
     }
 }
 
-public extension BindingTarget where Value: AnyObject {
+public extension BindingTarget where Value: AnyObject, Self: PropertyProtocol {
     /// Wraps this instance in a `PropertyBinding` object, using the specified validator function.
     ///
     /// Example:
     ///
     /// ```
     /// final class Volume {
-    ///   dynamic var volume: Double // Between 0 and 1. Could be defined in an ObjC parent class.
+    ///   let volume = MutableProperty<Double>(0) // Between 0 and 1
     ///
-    ///   var rex_volume: TypedDynamicProperty<Float>.Binding {
+    ///   var volumeBinding: ValidatingBinding<DynamicProperty<Float>, NoError> {
     ///     return associatedObject(self, key: &durationKey) {
-    ///       TypedDynamicProperty(object: $0, keyPath: "volume").bindingWithValidator($0.validVolume)
+    ///       $0.volume.bindingWithValidator($0.validVolume)
     ///     }
     ///   }
     ///
-    ///   private func validVolume(newVolume: Double) -> Double? {
-    ///     return max(0.0, min(1.0, newVolume))
+    ///   // Always returns success, merely clamping the value into place
+    ///   private func validVolume(newVolume: Double?) -> Result<Double?, NoError> {
+    ///     return .success(max(0.0, min(1.0, newVolume ?? volume.value))
     ///   }
     /// }
     /// ```

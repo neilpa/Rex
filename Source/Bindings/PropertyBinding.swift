@@ -15,6 +15,7 @@ import Result
 public final class ValidatingBinding<Target: BindingTarget, ValidationError: Error>: BindingTarget where Target: PropertyProtocol {
     /// Validators are expected to return either `nil` if the input value is invalid, the passed-in value, or a corrected version of the passed-in value. The behavior is completely up to the implementor.
     public typealias Validator = (Target.Value) -> Result<Target.Value, ValidationError>
+    public typealias Value = Target.Value
     
     fileprivate let _target: Target
     fileprivate let _validator: Validator?

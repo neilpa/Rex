@@ -14,6 +14,12 @@ extension UIBarItem {
     public var rex_enabled: MutableProperty<Bool> {
         return associatedProperty(self, key: &enabledKey, initial: { $0.enabled }, setter: { $0.enabled = $1 })
     }
+    
+    /// Wraps a UIBarItem's `title` value in a bindable property.
+    public var rex_title: MutableProperty<String?> {
+        return associatedProperty(self, key: &titleKey, initial: { $0.title }, setter: { $0.title = $1 })
+    }
 }
 
 private var enabledKey: UInt8 = 0
+private var titleKey: UInt8 = 0

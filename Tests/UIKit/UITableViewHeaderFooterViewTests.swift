@@ -17,7 +17,7 @@ class UITableViewHeaderFooterViewTests: XCTestCase {
 
         let header = UITableViewHeaderFooterView()
 
-        header.rex_hidden <~
+        header.bindables.isHidden <~
             hiddenProperty
                 .producer
                 .take(until: header.rex_prepareForReuse)

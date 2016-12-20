@@ -19,7 +19,7 @@ extension NSObject {
     public func rex_producerForKeyPath<T>(keyPath: String) -> SignalProducer<T, NoError> {
         return self.rac_valuesForKeyPath(keyPath, observer: nil)
             .toSignalProducer()
-            .map { $0 as! T }
+            .filterMap { $0 as? T }
             .flatMapError { error in
                 // Errors aren't possible, but the compiler doesn't know that.
                 assertionFailure("Unexpected error from KVO signal: \(error)")

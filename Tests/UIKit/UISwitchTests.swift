@@ -7,25 +7,27 @@
 //
 
 import XCTest
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 class UISwitchTests: XCTestCase {
     
     func testOnProperty() {
-        let `switch` = UISwitch(frame: CGRectZero)
-        `switch`.on = false
+        let `switch` = UISwitch(frame: .zero)
+        `switch`.isOn = false
 
         let (pipeSignal, observer) = Signal<Bool, NoError>.pipe()
-        `switch`.rex_on <~ SignalProducer(signal: pipeSignal)
+        `switch`.reactive.isOn <~ SignalProducer(signal: pipeSignal)
 
-        observer.sendNext(true)
-        XCTAssertTrue(`switch`.on)
-        observer.sendNext(false)
-        XCTAssertFalse(`switch`.on)
+        observer.send(value: true)
+        XCTAssertTrue(`switch`.isOn)
+        observer.send(value: false)
+        XCTAssertFalse(`switch`.isOn)
 
-        `switch`.on = true
-        `switch`.sendActionsForControlEvents(.ValueChanged)
-        XCTAssertTrue(`switch`.rex_on.value)
+        let onProperty =  MutableProperty<Bool>(false)
+        onProperty <~ `switch`.reactive.isOnValues
+        `switch`.isOn = true
+        `switch`.sendActions(for: .valueChanged)
+        XCTAssertTrue(onProperty.value)        
     }
 }

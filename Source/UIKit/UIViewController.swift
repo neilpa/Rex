@@ -7,41 +7,35 @@
 //
 
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 import UIKit
 
 extension UIViewController {
     /// Returns a `Signal`, that will be triggered
     /// when `self`'s `viewDidDisappear` is called
     public var rex_viewDidDisappear: Signal<(), NoError> {
-        return triggerForSelector(#selector(UIViewController.viewDidDisappear(_:)))
+        return reactive.trigger(for: #selector(UIViewController.viewDidDisappear(_:)))
     }
     
     /// Returns a `Signal`, that will be triggered
     /// when `self`'s `viewWillDisappear` is called
     public var rex_viewWillDisappear: Signal<(), NoError> {
-        return triggerForSelector(#selector(UIViewController.viewWillDisappear(_:)))
+        return reactive.trigger(for: #selector(UIViewController.viewWillDisappear(_:)))
     }
     
     /// Returns a `Signal`, that will be triggered
     /// when `self`'s `viewDidAppear` is called
     public var rex_viewDidAppear: Signal<(), NoError> {
-        return triggerForSelector(#selector(UIViewController.viewDidAppear(_:)))
+        return reactive.trigger(for: #selector(UIViewController.viewDidAppear(_:)))
     }
     
     /// Returns a `Signal`, that will be triggered
     /// when `self`'s `viewWillAppear` is called
     public var rex_viewWillAppear: Signal<(), NoError> {
-        return triggerForSelector(#selector(UIViewController.viewWillAppear(_:)))
+        return reactive.trigger(for: #selector(UIViewController.viewWillAppear(_:)))
     }
     
-    private func triggerForSelector(selector: Selector) -> Signal<(), NoError>  {
-        return self
-            .rac_signalForSelector(selector)
-            .rex_toTriggerSignal()
-    }
-    
-    public typealias DismissingCompletion = (Void -> Void)?
+    public typealias DismissingCompletion = ((Void) -> Void)?
     public typealias DismissingInformation = (animated: Bool, completion: DismissingCompletion)?
     
     /// Wraps a viewController's `dismissViewControllerAnimated` function in a bindable property.
@@ -56,17 +50,16 @@ extension UIViewController {
     /// or `viewController.dismissViewControllerAnimated(true, completion: nil)`
     public var rex_dismissAnimated: MutableProperty<DismissingInformation> {
         
-        let initial: UIViewController -> DismissingInformation = { _ in nil }
+        let initial: (UIViewController) -> DismissingInformation = { _ in nil }
         let setter: (UIViewController, DismissingInformation) -> Void = { host, dismissingInfo in
             
             guard let unwrapped = dismissingInfo else { return }
-            host.dismissViewControllerAnimated(unwrapped.animated, completion: unwrapped.completion)
+            host.dismiss(animated: unwrapped.animated, completion: unwrapped.completion)
         }
-        
+
         let property = associatedProperty(self, key: &dismissModally, initial: initial, setter: setter) { property in
-            property <~ self.rac_signalForSelector(#selector(UIViewController.dismissViewControllerAnimated(_:completion:)))
-                .takeUntilBlock { _ in property.value != nil }
-                .rex_toTriggerSignal()
+            property <~ self.reactive.trigger(for: #selector(UIViewController.dismiss(animated:completion:)))
+                .take(while: { _ in property.value == nil })
                 .map { _ in return nil }
         }
         

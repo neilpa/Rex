@@ -7,8 +7,9 @@
 //
 
 import Rex
-import ReactiveCocoa
+import ReactiveSwift
 import XCTest
+import enum Result.NoError
 
 final class NSObjectTests: XCTestCase {
     
@@ -16,7 +17,7 @@ final class NSObjectTests: XCTestCase {
         let object = Object()
         var value: String = ""
 
-        object.rex_producerForKeyPath("string").startWithNext { value = $0 }
+        object.reactive.values(forKeyPath: "string").startWithValues { value = $0 as! String }
         XCTAssertEqual(value, "foo")
 
         object.string = "bar"
@@ -25,13 +26,13 @@ final class NSObjectTests: XCTestCase {
     
     func testObjectsWillBeDeallocatedSignal() {
         
-        let expectation = self.expectationWithDescription("Expected timer to send `completed` event when object deallocates")
-        defer { self.waitForExpectationsWithTimeout(2, handler: nil) }
+        let expectation = self.expectation(description: "Expected timer to send `completed` event when object deallocates")
+        defer { self.waitForExpectations(timeout: 2, handler: nil) }
         
         let object = Object()
 
-        timer(1, onScheduler: QueueScheduler(name: "test.queue"))
-            .takeUntil(object.rex_willDealloc)
+        timer(interval: 1, on: QueueScheduler(name: "test.queue"))
+            .take(until: object.reactive.lifetime.ended)
             .startWithCompleted {
                 expectation.fulfill()
         }
@@ -58,8 +59,7 @@ final class NSObjectDeallocTests: XCTestCase {
     func testClassPropertyDoesntCreateRetainCycle() {
         let object = Object()
         _object = object
-
-        associatedProperty(object, keyPath: "string", placeholder: { _ in "" }) <~ SignalProducer(value: "Test")
+        associatedProperty(object, keyPath: "string", placeholder: { "Test"} ) <~ SignalProducer(value: "Test")
         XCTAssert(_object?.string == "Test")
     }
 }

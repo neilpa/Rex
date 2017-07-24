@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 class UIActivityIndicatorTests: XCTestCase {
@@ -20,15 +20,15 @@ class UIActivityIndicatorTests: XCTestCase {
     }
 
     func testAnimatingProperty() {
-        let indicatorView = UIActivityIndicatorView(frame: CGRectZero)
+        let indicatorView = UIActivityIndicatorView(frame: .zero)
         _activityIndicatorView = indicatorView
         
         let (pipeSignal, observer) = Signal<Bool, NoError>.pipe()
-        indicatorView.rex_animating <~ SignalProducer(signal: pipeSignal)
+        indicatorView.reactive.isAnimating <~ SignalProducer(signal: pipeSignal)
         
-        observer.sendNext(true)
-        XCTAssertTrue(indicatorView.isAnimating())
-        observer.sendNext(false)
-        XCTAssertFalse(indicatorView.isAnimating())
+        observer.send(value: true)
+        XCTAssertTrue(indicatorView.isAnimating)
+        observer.send(value: false)
+        XCTAssertFalse(indicatorView.isAnimating)
     }
 }

@@ -6,19 +6,18 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
 
-extension NSData {
+extension Data {
     /// Read the data at the URL, sending the result or an error.
-    @warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public class func rex_dataWithContentsOfURL(url: NSURL, options: NSDataReadingOptions = NSDataReadingOptions()) -> SignalProducer<NSData, NSError> {
+    public static func rex_dataWithContentsOfURL(_ url: NSURL, options: NSData.ReadingOptions = NSData.ReadingOptions()) -> SignalProducer<NSData, NSError> {
         return SignalProducer<NSData, NSError> { observer, disposable in
             do {
-                let data = try NSData(contentsOfURL: url, options: options)
-                observer.sendNext(data)
+                let data = try NSData(contentsOf: url as URL, options: options)
+                observer.send(value: data)
                 observer.sendCompleted()
             } catch {
-                observer.sendFailed(error as NSError)
+                observer.send(error: error as NSError)
             }
         }
     }

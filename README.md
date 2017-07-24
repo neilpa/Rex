@@ -16,8 +16,9 @@ Thanks!
 # Rex [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 Extensions for [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) that may not fit in the core framework.
 
-New development targets RAC 4/Swift 2/Xcode 7. For RAC 3 support [see the 0.5 
-release](https://github.com/RACCommunity/Rex/releases/tag/v0.5.0).
+New development targets RAC 5/Swfit 3/Xcode 8.
+* For RAC 4/Swift 2/Xcode 7 support [see the 0.12 release](https://github.com/RACCommunity/Rex/releases/tag/0.12.0)
+* For RAC 3 support [see the 0.5 release](https://github.com/RACCommunity/Rex/releases/tag/v0.5.0).
 
 ## Signal
 All `Signal` operators are available for `SignaProducer`s too via explicit `lift`ing.
@@ -62,20 +63,13 @@ Partitions values from `producer` into new producer groups based on the key retu
 func groupBy<K: Hashable>(grouping: T -> K) -> SignalProducer<(K, SignalProducer<T, E>), E>
 ```
 
-## UIKit Extensions
+## UIKit / AppKit Extensions
 
-##### `UIButton.rex_pressed`
-
-Flexible way to bind `CocoaAction` to the press of button. In addition the button will be disabled during the `Action` executing. Such behavior is convenient for tasks that require some time, like a download process in the example below.
+As of RAC 5, UIKit and AppKit Extensions have been moved from REX [to RAC](https://github.com/ReactiveCocoa/ReactiveCocoa/releases/tag/5.0.0-alpha.1). 
+They are now accessible via `reactive` with pure RAC, e.g: 
 
 ```swift
-let downloadAction = Action<UIButton, NSData, NSError> { _ in
-    let url = NSURL(string: "https://github.com/RACCommunity/Rex/archive/master.zip")
-    let request = NSURLRequest(URL: url!)
-    return NSURLSession.sharedSession().rac_dataWithRequest(request).map { $0.0 }
-}
-
-downloadButton.rex_pressed.value = downloadAction.unsafeCocoaAction
+imageView.reactive.image <~ SignalProducer(value: image)
 ```
 
 ## License

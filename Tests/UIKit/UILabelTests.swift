@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
 import UIKit
 import XCTest
 import enum Result.NoError
@@ -21,10 +21,10 @@ class UILabelTests: XCTestCase {
     }
 
     func testTextPropertyDoesntCreateRetainCycle() {
-        let label = UILabel(frame: CGRectZero)
+        let label = UILabel(frame: .zero)
         _label = label
 
-        label.rex_text <~ SignalProducer(value: "Test")
+        label.reactive.text <~ SignalProducer(value: "Test")
         XCTAssert(_label?.text == "Test")
     }
     
@@ -32,25 +32,25 @@ class UILabelTests: XCTestCase {
         let firstChange = "first"
         let secondChange = "second"
         
-        let label = UILabel(frame: CGRectZero)
+        let label = UILabel(frame: .zero)
         label.text = ""
         
         let (pipeSignal, observer) = Signal<String?, NoError>.pipe()
-        label.rex_text <~ SignalProducer(signal: pipeSignal)
+        label.reactive.text <~ SignalProducer(signal: pipeSignal)
         
-        observer.sendNext(firstChange)
+        observer.send(value: firstChange)
         XCTAssertEqual(label.text, firstChange)
-        observer.sendNext(secondChange)
+        observer.send(value: secondChange)
         XCTAssertEqual(label.text, secondChange)
-        observer.sendNext(nil)
+        observer.send(value: nil)
         XCTAssertNil(label.text)
     }
     
     func testAttributedTextPropertyDoesntCreateRetainCycle() {
-        let label = UILabel(frame: CGRectZero)
+        let label = UILabel(frame: .zero)
         _label = label
         
-        label.rex_attributedText <~ SignalProducer(value: NSAttributedString(string: "Test"))
+        label.reactive.attributedText <~ SignalProducer(value: NSAttributedString(string: "Test"))
         XCTAssert(_label?.attributedText?.string == "Test")
     }
     
@@ -58,31 +58,31 @@ class UILabelTests: XCTestCase {
         let firstChange = NSAttributedString(string: "first")
         let secondChange = NSAttributedString(string: "second")
         
-        let label = UILabel(frame: CGRectZero)
+        let label = UILabel(frame: .zero)
         label.attributedText = NSAttributedString(string: "")
         
         let (pipeSignal, observer) = Signal<NSAttributedString?, NoError>.pipe()
-        label.rex_attributedText <~ SignalProducer(signal: pipeSignal)
+        label.reactive.attributedText <~ SignalProducer(signal: pipeSignal)
         
-        observer.sendNext(firstChange)
+        observer.send(value: firstChange)
         XCTAssertEqual(label.attributedText, firstChange)
-        observer.sendNext(secondChange)
+        observer.send(value: secondChange)
         XCTAssertEqual(label.attributedText, secondChange)
     }
     
     func testTextColorProperty() {
-        let firstChange = UIColor.redColor()
-        let secondChange = UIColor.blackColor()
+        let firstChange = UIColor.red
+        let secondChange = UIColor.black
         
-        let label = UILabel(frame: CGRectZero)
+        let label = UILabel(frame: .zero)
 
         let (pipeSignal, observer) = Signal<UIColor, NoError>.pipe()
-        label.textColor = UIColor.blackColor()
-        label.rex_textColor <~ SignalProducer(signal: pipeSignal)
+        label.textColor = .black
+        label.reactive.textColor <~ SignalProducer(signal: pipeSignal)
         
-        observer.sendNext(firstChange)
+        observer.send(value: firstChange)
         XCTAssertEqual(label.textColor, firstChange)
-        observer.sendNext(secondChange)
+        observer.send(value: secondChange)
         XCTAssertEqual(label.textColor, secondChange)
     }
 }

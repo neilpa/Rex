@@ -6,7 +6,7 @@
 //  Copyright © 2016 Neil Pankey. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
 import UIKit
 import XCTest
 import enum Result.NoError
@@ -20,10 +20,10 @@ class UIProgressViewTests: XCTestCase {
     }
     
     func testProgressPropertyDoesntCreateRetainCycle() {
-        let progressView = UIProgressView(frame: CGRectZero)
+        let progressView = UIProgressView(frame: .zero)
         _progressView = progressView
         
-        progressView.rex_progress <~ SignalProducer(value: 0.5)
+        progressView.reactive.progress <~ SignalProducer(value: 0.5)
         XCTAssert(_progressView?.progress == 0.5)
     }
     
@@ -31,15 +31,15 @@ class UIProgressViewTests: XCTestCase {
         let firstChange: Float = 0.5
         let secondChange: Float = 0.0
         
-        let progressView = UIProgressView(frame: CGRectZero)
+        let progressView = UIProgressView(frame: .zero)
         progressView.progress = 1.0
         
         let (pipeSignal, observer) = Signal<Float, NoError>.pipe()
-        progressView.rex_progress <~ SignalProducer(signal: pipeSignal)
+        progressView.reactive.progress <~ SignalProducer(signal: pipeSignal)
         
-        observer.sendNext(firstChange)
+        observer.send(value: firstChange)
         XCTAssertEqual(progressView.progress, firstChange)
-        observer.sendNext(secondChange)
+        observer.send(value: secondChange)
         XCTAssertEqual(progressView.progress, secondChange)
     }
 }

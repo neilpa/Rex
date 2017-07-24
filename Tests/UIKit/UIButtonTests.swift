@@ -6,24 +6,13 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
+import ReactiveSwift
 import ReactiveCocoa
 import UIKit
 import XCTest
 import enum Result.NoError
 
-extension UIButton {
-    static func button() -> UIButton {
-        let button = UIButton(type: UIButtonType.Custom)
-        return button;
-    }
-    
-    override public func sendAction(action: Selector, to target: AnyObject?, forEvent event: UIEvent?) {
-        target?.performSelector(action, withObject: nil)
-    }
-}
-
 class UIButtonTests: XCTestCase {
-
     weak var _button: UIButton?
     
     override func tearDown() {
@@ -32,67 +21,67 @@ class UIButtonTests: XCTestCase {
     }
     
     func testEnabledPropertyDoesntCreateRetainCycle() {
-        let button = UIButton(frame: CGRectZero)
+        let button = UIButton(frame: .zero)
         _button = button
         
-        button.rex_enabled <~ SignalProducer(value: false)
-        XCTAssert(_button?.enabled == false)
+        button.reactive.isEnabled <~ SignalProducer(value: false)
+        XCTAssert(_button?.isEnabled == false)
     }
 
     func testPressedPropertyDoesntCreateRetainCycle() {
-        let button = UIButton(frame: CGRectZero)
+        let button = UIButton(frame: .zero)
         _button = button
 
         let action = Action<(),(),NoError> {
             SignalProducer(value: ())
         }
-        button.rex_pressed <~ SignalProducer(value: CocoaAction(action, input: ()))
+        button.reactive.pressed = CocoaAction(action, input: ())
     }
 
     func testTitlePropertyDoesntCreateRetainCycle() {
-        let button = UIButton(frame: CGRectZero)
+        let button = UIButton(frame: .zero)
         _button = button
 
-        button.rex_title <~ SignalProducer(value: "button")
-        XCTAssert(_button?.titleForState(.Normal) == "button")
+        button.reactive.title <~ SignalProducer(value: "button")
+        XCTAssert(_button?.title(for: UIControlState()) == "button")
     }
     
     func testTitleProperty() {
         let firstTitle = "First title"
         let secondTitle = "Second title"
-        let button = UIButton(frame: CGRectZero)
+        let button = UIButton(frame: .zero)
         let (pipeSignal, observer) = Signal<String, NoError>.pipe()
-        button.rex_title <~ SignalProducer(signal: pipeSignal)
-        button.setTitle("", forState: .Selected)
-        button.setTitle("", forState: .Highlighted)
+        button.reactive.title <~ SignalProducer(signal: pipeSignal)
+        button.setTitle("", for: .selected)
+        button.setTitle("", for: .highlighted)
         
-        observer.sendNext(firstTitle)
-        XCTAssertEqual(button.titleForState(.Normal), firstTitle)
-        XCTAssertEqual(button.titleForState(.Highlighted), "")
-        XCTAssertEqual(button.titleForState(.Selected), "")
+        observer.send(value: firstTitle)
+        XCTAssertEqual(button.title(for: .normal), firstTitle)
+        XCTAssertEqual(button.title(for: .highlighted), "")
+        XCTAssertEqual(button.title(for: .selected), "")
         
-        observer.sendNext(secondTitle)
-        XCTAssertEqual(button.titleForState(.Normal), secondTitle)
-        XCTAssertEqual(button.titleForState(.Highlighted), "")
-        XCTAssertEqual(button.titleForState(.Selected), "")
+        observer.send(value: secondTitle)
+        XCTAssertEqual(button.title(for: .normal), secondTitle)
+        XCTAssertEqual(button.title(for: .highlighted), "")
+        XCTAssertEqual(button.title(for: .selected), "")
     }
     
     func testPressedProperty() {
-        let button = UIButton(frame: CGRectZero)
-        button.enabled = true
-        button.userInteractionEnabled = true
-
-        let passed = MutableProperty(false)
+        let button = UIButton(frame: .zero)
+        button.isEnabled = true
+        button.isUserInteractionEnabled = true
+        
+        let pressed = MutableProperty(false)
         let action = Action<(), Bool, NoError> { _ in
             SignalProducer(value: true)
         }
         
-        passed <~ SignalProducer(signal: action.values)
-        button.rex_pressed <~ SignalProducer(value: CocoaAction(action, input: ()))
+        pressed <~ SignalProducer(signal: action.values)
         
-        button.sendActionsForControlEvents(.TouchUpInside)
+        button.reactive.pressed = CocoaAction(action)
+        XCTAssertFalse(pressed.value)
         
-        
-        XCTAssertTrue(passed.value)
+        button.sendActions(for: .touchUpInside)
+        XCTAssertTrue(pressed.value)
     }
 }

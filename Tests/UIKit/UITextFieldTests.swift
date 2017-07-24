@@ -6,28 +6,29 @@
 //  Copyright © 2016 Neil Pankey. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
+import UIKit
+import XCTest
+
+import ReactiveSwift
 import UIKit
 import XCTest
 
 class UITextFieldTests: XCTestCase {
-
+    
     func testTextProperty() {
-        let expectation = self.expectationWithDescription("Expected `rex_text`'s value to equal to the textField's text")
-        defer { self.waitForExpectationsWithTimeout(2, handler: nil) }
-
-        let textField = UITextField(frame: CGRectZero)
+        let expectation = self.expectation(description: "Expected `rex_text`'s value to equal to the textField's text")
+        defer { self.waitForExpectations(timeout: 2, handler: nil) }
+        
+        let textField = UITextField(frame: .zero)
         textField.text = "Test"
         
-        textField.rex_text.signal.observeNext { text in
+        textField.reactive.continuousTextValues.observeValues { text in
             XCTAssertEqual(text, textField.text)
             expectation.fulfill()
         }
-
-#if os(iOS)
-        textField.sendActionsForControlEvents(.EditingChanged)
-#else
-        NSNotificationCenter.defaultCenter().postNotificationName(UITextFieldTextDidChangeNotification, object: textField)
-#endif
+        
+        textField.sendActions(for: .editingChanged)
     }
 }
+

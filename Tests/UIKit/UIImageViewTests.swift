@@ -6,7 +6,7 @@
 //  Copyright © 2015 Neil Pankey. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
 import UIKit
 import XCTest
 import enum Result.NoError
@@ -21,52 +21,52 @@ class UIImageViewTests: XCTestCase {
     }
     
     func testImagePropertyDoesntCreateRetainCycle() {
-        let imageView = UIImageView(frame: CGRectZero)
+        let imageView = UIImageView(frame: .zero)
         _imageView = imageView
         
         let image = UIImage()
         
-        imageView.rex_image <~ SignalProducer(value: image)
+        imageView.reactive.image <~ SignalProducer(value: image)
         XCTAssert(_imageView?.image == image)
     }
     
     func testHighlightedImagePropertyDoesntCreateRetainCycle() {
-        let imageView = UIImageView(frame: CGRectZero)
+        let imageView = UIImageView(frame: .zero)
         _imageView = imageView
         
         let image = UIImage()
         
-        imageView.rex_highlightedImage <~ SignalProducer(value: image)
+        imageView.reactive.highlightedImage <~ SignalProducer(value: image)
         XCTAssert(_imageView?.highlightedImage == image)
     }
     
     func testImageProperty() {
-        let imageView = UIImageView(frame: CGRectZero)
+        let imageView = UIImageView(frame: .zero)
         
         let firstChange = UIImage()
         let secondChange = UIImage()
         
         let (pipeSignal, observer) = Signal<UIImage?, NoError>.pipe()
-        imageView.rex_image <~ SignalProducer(signal: pipeSignal)
+        imageView.reactive.image <~ SignalProducer(signal: pipeSignal)
         
-        observer.sendNext(firstChange)
+        observer.send(value: firstChange)
         XCTAssertEqual(imageView.image, firstChange)
-        observer.sendNext(secondChange)
+        observer.send(value: secondChange)
         XCTAssertEqual(imageView.image, secondChange)
     }
     
     func testHighlightedImageProperty() {
-        let imageView = UIImageView(frame: CGRectZero)
+        let imageView = UIImageView(frame: .zero)
         
         let firstChange = UIImage()
         let secondChange = UIImage()
         
         let (pipeSignal, observer) = Signal<UIImage?, NoError>.pipe()
-        imageView.rex_highlightedImage <~ SignalProducer(signal: pipeSignal)
+        imageView.reactive.highlightedImage <~ SignalProducer(signal: pipeSignal)
         
-        observer.sendNext(firstChange)
+        observer.send(value: firstChange)
         XCTAssertEqual(imageView.highlightedImage, firstChange)
-        observer.sendNext(secondChange)
+        observer.send(value: secondChange)
         XCTAssertEqual(imageView.highlightedImage, secondChange)
     }
 }

@@ -6,18 +6,19 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
+import ReactiveSwift
 import ReactiveCocoa
 import enum Result.NoError
 
 extension Action {
     /// Creates an always disabled action.
-    public static var rex_disabled: Action {
-        return Action(enabledIf: ConstantProperty(false)) { _ in .empty }
+    public static var rex_disabled: Action<Input, Output, Error> {
+        return Action(enabledIf: Property(value: false)) { _ in .empty }
     }
     
     /// Whether the action execution was started.
     public var rex_started: Signal<Void, NoError> {
-        return self.executing.signal
+        return self.isExecuting.signal
             .filterMap { $0 ? () : nil }
     }
 
@@ -25,7 +26,7 @@ extension Action {
     public var rex_completed: Signal<Void, NoError> {
         return events
             .filterMap { event -> Void? in
-                if case .Completed = event {
+                if case .completed = event {
                     return ()
                 } else {
                     return nil
@@ -39,15 +40,5 @@ extension CocoaAction {
     /// things like `rac_pressed`.
     public static var rex_disabled: CocoaAction {
         return CocoaAction(Action<Any?, (), NoError>.rex_disabled, input: nil)
-    }
-
-    /// Creates a producer for the `enabled` state of a CocoaAction.
-    public var rex_enabledProducer: SignalProducer<Bool, NoError> {
-        return rex_producerForKeyPath("enabled")
-    }
-
-    /// Creates a producer for the `executing` state of a CocoaAction.
-    public var rex_executingProducer: SignalProducer<Bool, NoError> {
-        return rex_producerForKeyPath("executing")
     }
 }

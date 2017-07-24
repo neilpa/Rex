@@ -7,14 +7,14 @@
 //
 
 @testable import Rex
-import ReactiveCocoa
+import ReactiveSwift
 import XCTest
 import enum Result.NoError
 
 final class ActionTests: XCTestCase {
     
-    enum TestError: ErrorType {
-        case Unknown
+    enum TestError: Error {
+        case unknown
     }
 
     func testStarted() {
@@ -23,7 +23,7 @@ final class ActionTests: XCTestCase {
         var started = false
         action
             .rex_started
-            .observeNext { started = true }
+            .observeValues { started = true }
 
         action
             .apply()
@@ -33,19 +33,20 @@ final class ActionTests: XCTestCase {
     }
     
     func testCompleted() {
-        let (producer, observer) = SignalProducer<Int, TestError>.buffer(Int.max)
+        let (signal, observer) = Signal<Int, TestError>.pipe()
+        let producer = SignalProducer<Int, TestError>(signal: signal)
         let action = Action { producer }
 
         var completed = false
         action
             .rex_completed
-            .observeNext { completed = true }
+            .observeValues { completed = true }
 
         action
             .apply()
             .start()
         
-        observer.sendNext(1)
+        observer.send(value: 1)
         XCTAssertFalse(completed)
 
         observer.sendCompleted()
@@ -53,19 +54,20 @@ final class ActionTests: XCTestCase {
     }
     
     func testCompletedOnFailed() {
-        let (producer, observer) = SignalProducer<Int, TestError>.buffer(Int.max)
+        let (signal, observer) = Signal<Int, TestError>.pipe()
+        let producer = SignalProducer<Int, TestError>(signal: signal)
         let action = Action { producer }
         
         var completed = false
         action
             .rex_completed
-            .observeNext { completed = true }
+            .observeValues { completed = true }
 
         action
             .apply()
             .start()
         
-        observer.sendFailed(.Unknown)
+        observer.send(error: .unknown)
         XCTAssertFalse(completed)
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import ReactiveCocoa
+import ReactiveSwift
 
 class UITableViewHeaderFooterViewTests: XCTestCase {
     
@@ -17,19 +17,19 @@ class UITableViewHeaderFooterViewTests: XCTestCase {
 
         let header = UITableViewHeaderFooterView()
 
-        header.rex_hidden <~
+        header.reactive.isHidden <~
             hiddenProperty
                 .producer
-                .takeUntil(header.rex_prepareForReuse)
+                .take(until: header.reactive.prepareForReuse)
 
-        XCTAssertFalse(header.hidden)
+        XCTAssertFalse(header.isHidden)
 
         hiddenProperty <~ SignalProducer(value: true)
-        XCTAssertTrue(header.hidden)
+        XCTAssertTrue(header.isHidden)
 
         header.prepareForReuse()
 
         hiddenProperty <~ SignalProducer(value: false)
-        XCTAssertTrue(header.hidden)
+        XCTAssertTrue(header.isHidden)
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import ReactiveCocoa
+import ReactiveSwift
 
 class UICollectionReusableViewTests: XCTestCase {
     
@@ -17,19 +17,19 @@ class UICollectionReusableViewTests: XCTestCase {
 
         let cell = UICollectionViewCell()
 
-        cell.rex_hidden <~
+        cell.reactive.isHidden <~
             hiddenProperty
                 .producer
-                .takeUntil(cell.rex_prepareForReuse)
+                .take(until: cell.reactive.prepareForReuse)
 
-        XCTAssertFalse(cell.hidden)
+        XCTAssertFalse(cell.isHidden)
 
         hiddenProperty <~ SignalProducer(value: true)
-        XCTAssertTrue(cell.hidden)
+        XCTAssertTrue(cell.isHidden)
 
         cell.prepareForReuse()
 
         hiddenProperty <~ SignalProducer(value: false)
-        XCTAssertTrue(cell.hidden)
+        XCTAssertTrue(cell.isHidden)
     }
 }

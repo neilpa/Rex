@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 class UISegmentedControlTests: XCTestCase {
@@ -18,12 +18,12 @@ class UISegmentedControlTests: XCTestCase {
         XCTAssertEqual(s.numberOfSegments, 3)
         
         let (pipeSignal, observer) = Signal<Int, NoError>.pipe()
-        s.rex_selectedSegmentIndex <~ SignalProducer(signal: pipeSignal)
+        s.reactive.selectedSegmentIndex <~ SignalProducer(signal: pipeSignal)
         
         XCTAssertEqual(s.selectedSegmentIndex, UISegmentedControlNoSegment)
-        observer.sendNext(1)
+        observer.send(value: 1)
         XCTAssertEqual(s.selectedSegmentIndex, 1)
-        observer.sendNext(2)
+        observer.send(value: 2)
         XCTAssertEqual(s.selectedSegmentIndex, 2)
     }
 }

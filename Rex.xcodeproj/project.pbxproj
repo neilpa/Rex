@@ -39,6 +39,10 @@
 		8295FD871B87309F007C9000 /* UIControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD851B873081007C9000 /* UIControlTests.swift */; };
 		8295FD8A1B87352D007C9000 /* UIButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD881B873490007C9000 /* UIButtonTests.swift */; };
 		8295FD8D1B87374A007C9000 /* UIBarButtonItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */; };
+		9D182AB71D4584AA009985E5 /* UIPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D182AB61D4584AA009985E5 /* UIPageControl.swift */; };
+		9D182AB81D4584AA009985E5 /* UIPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D182AB61D4584AA009985E5 /* UIPageControl.swift */; };
+		9D182ABA1D4584CC009985E5 /* UIPageControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D182AB91D4584CC009985E5 /* UIPageControlTests.swift */; };
+		9D182ABB1D4584CC009985E5 /* UIPageControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D182AB91D4584CC009985E5 /* UIPageControlTests.swift */; };
 		9DA915A41CA6301C003723B9 /* UIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A31CA6301C003723B9 /* UIDatePicker.swift */; };
 		9DA915A61CA63046003723B9 /* UIDatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */; };
 		C72CF3E51CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
@@ -233,6 +237,8 @@
 		8295FD851B873081007C9000 /* UIControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIControlTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8295FD881B873490007C9000 /* UIButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIButtonTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIBarButtonItemTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9D182AB61D4584AA009985E5 /* UIPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPageControl.swift; sourceTree = "<group>"; };
+		9D182AB91D4584CC009985E5 /* UIPageControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPageControlTests.swift; sourceTree = "<group>"; };
 		9DA915A31CA6301C003723B9 /* UIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIDatePicker.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIDatePickerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C72CF3E41CBF188A00E19897 /* RACSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RACSignal.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -468,6 +474,7 @@
 				9DA915A31CA6301C003723B9 /* UIDatePicker.swift */,
 				8289A2E21BD7EF740097FB60 /* UIImageView.swift */,
 				D86FFBD71B34B242001A89B3 /* UILabel.swift */,
+				9D182AB61D4584AA009985E5 /* UIPageControl.swift */,
 				E6933BE61CD9C0B2006F7CE7 /* UIProgressView.swift */,
 				7D2AA99A1CB6EFEB008AB5C9 /* UISwitch.swift */,
 				5B1C882D1D0715CE000B888F /* UISegmentedControl.swift */,
@@ -513,6 +520,7 @@
 				9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */,
 				8289A2E01BD7EF1F0097FB60 /* UIImageViewTests.swift */,
 				D8F073141B861B3A0047D546 /* UILabelTests.swift */,
+				9D182AB91D4584CC009985E5 /* UIPageControlTests.swift */,
 				E6933BE81CD9C1F1006F7CE7 /* UIProgressViewTests.swift */,
 				7D2AA99C1CB6F275008AB5C9 /* UISwitchTests.swift */,
 				5B1C882F1D071639000B888F /* UISegmentedControlTests.swift */,
@@ -885,6 +893,7 @@
 				D834572E1AFEE45B0070616A /* SignalProducer.swift in Sources */,
 				C7DCE2B41CB3C89A001217D8 /* UITextView.swift in Sources */,
 				8289A2E51BD7F6DD0097FB60 /* UIView.swift in Sources */,
+				9D182AB71D4584AA009985E5 /* UIPageControl.swift in Sources */,
 				D86FFBD61B34B116001A89B3 /* UIControl.swift in Sources */,
 				D8F0973F1B17F31E002E15BA /* NSData.swift in Sources */,
 				D86FFBDD1B34B691001A89B3 /* UIButton.swift in Sources */,
@@ -916,6 +925,7 @@
 				D83457301AFEE45E0070616A /* SignalProducerTests.swift in Sources */,
 				D83457411AFEE6050070616A /* SignalTests.swift in Sources */,
 				8295FD8D1B87374A007C9000 /* UIBarButtonItemTests.swift in Sources */,
+				9D182ABA1D4584CC009985E5 /* UIPageControlTests.swift in Sources */,
 				8295FD871B87309F007C9000 /* UIControlTests.swift in Sources */,
 				C7DCE2B71CB3C9D6001217D8 /* UITextViewTests.swift in Sources */,
 				5B7F81E41D0842B50014B06D /* UISegmentedControlTests.swift in Sources */,
@@ -960,6 +970,7 @@
 				E6933BED1CD9C37D006F7CE7 /* UIProgressView.swift in Sources */,
 				D8715DBF1C2112D6005F4191 /* NSData.swift in Sources */,
 				D8715DCC1C211553005F4191 /* UIView.swift in Sources */,
+				9D182AB81D4584AA009985E5 /* UIPageControl.swift in Sources */,
 				D8715DBA1C2112D1005F4191 /* Action.swift in Sources */,
 				D8715DC81C211553005F4191 /* UIButton.swift in Sources */,
 				D8715DC71C211553005F4191 /* UIBarItem.swift in Sources */,
@@ -980,6 +991,7 @@
 				7D5FE3081CD4B04E00834675 /* UITextFieldTests.swift in Sources */,
 				D8715DE21C211643005F4191 /* UIControlTests.swift in Sources */,
 				CC02C18C1CCA704F0025CC04 /* ActionTests.swift in Sources */,
+				9D182ABB1D4584CC009985E5 /* UIPageControlTests.swift in Sources */,
 				D8715DDF1C21163B005F4191 /* NSObjectTests.swift in Sources */,
 				7DC3257E1CC6FD1C00746D88 /* UITableViewCellTests.swift in Sources */,
 				D8715DDC1C211637005F4191 /* PropertyTests.swift in Sources */,
